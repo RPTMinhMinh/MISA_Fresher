@@ -1,0 +1,15 @@
+/* src/assets/fonts/fonts.css */
+
+@font-face {
+    font-family: 'MISACustomFont';
+    src: url('./10182c3e4e1cdcfd93ba19610e97c790.eot');
+    src: url('./86035194a2ecaec2e33d6deae8ecf2ab.eot') format('embedded-opentype'),
+         url('./54fbc883d110b217f19a4cfe3898979d.woff') format('woff'),
+         url('./5bf5f8dab6f35fab3ae560d8cc2923b8.woff') format('woff'),
+         url('./05a65153efe56028d343c10b53faa583.ttf') format('truetype'),
+         url('./29c95c2d68c76de3ee30f7b2c0220da9.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
