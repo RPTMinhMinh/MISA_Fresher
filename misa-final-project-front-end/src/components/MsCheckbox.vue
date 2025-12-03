@@ -40,7 +40,7 @@ const handleUpdateChecked = (checked) => {
 </script>
   
 <style scoped>
-/* Màu Cyan/Teal chủ đạo: #0097c2 */
+/* Màu Cyan/Teal chủ đạo: #20A5C8 */
 
 /* 1. Ghi đè kích thước và viền mặc định của hộp checkbox */
 .ms-checkbox-wrapper :deep(.ant-checkbox-inner) {
@@ -55,23 +55,23 @@ const handleUpdateChecked = (checked) => {
 
 /* 2. Trạng thái HOVER (Chưa checked) */
 .ms-checkbox-wrapper :deep(.ant-checkbox:hover .ant-checkbox-inner) {
-    border-color: #0097c2 !important;
+    border-color: #20A5C8 !important;
     /* Viền xanh Cyan/Teal khi Hover */
 }
 
 /* 3. Trạng thái ACTIVE (Checked) */
 .ms-checkbox-wrapper :deep(.ant-checkbox-checked .ant-checkbox-inner) {
-    background-color: #0097c2 !important;
+    background-color: #20A5C8 !important;
     /* Nền xanh Cyan/Teal */
-    border-color: #0097c2 !important;
+    border-color: #20A5C8 !important;
     /* Viền xanh Cyan/Teal */
 }
 
 /* 4. Trạng thái HOVER (Đã checked) */
 .ms-checkbox-wrapper :deep(.ant-checkbox-checked:hover .ant-checkbox-inner) {
-    background-color: #007b9e !important;
+    background-color: #20A5C8 !important;
     /* Nền đậm hơn khi Hover checked */
-    border-color: #007b9e !important;
+    border-color: #20A5C8 !important;
 }
 
 /* 5. Icon dấu tích (tick/check mark) */

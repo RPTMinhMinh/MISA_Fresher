@@ -14,3 +14,7 @@ export function useSidebar() {
     toggleSidebar,
   }
 }
+
+
+// phóng to (giãn giao diện) - thu nhỏ giao diện content (từ bên phải)
+// phóng to (thu nhỏ giao diện content từ bên trái)
