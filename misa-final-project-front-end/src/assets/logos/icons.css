@@ -172,3 +172,15 @@
 	width: 17px;
 	height: 16px;
 }
+
+.icon-edit{
+  background: url('../images/qlts-icon.png') no-repeat -156px -68px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon-delete-dark{
+  background: url('../images/qlts-icon.png') no-repeat -419px -111px;
+	width: 18px;
+	height: 18px;
+}

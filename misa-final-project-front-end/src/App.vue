@@ -1,7 +1,7 @@
 <script setup>
 import TheHeader from '@/layouts/TheHeader.vue';
 import TheSideBar from '@/layouts/TheSideBar.vue';
-import TheContent from '@/views/asset/TheContent.vue';
+import Asset from '@/views/asset/Asset.vue';
 </script>
 
 <template>
@@ -19,7 +19,7 @@ import TheContent from '@/views/asset/TheContent.vue';
         <TheHeader />
 
         <!-- Content hiển thị trực tiếp ở đây (không cần placeholder) -->
-        <TheContent />
+        <Asset />
 
       </div>
 

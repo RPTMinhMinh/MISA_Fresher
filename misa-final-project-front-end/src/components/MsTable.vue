@@ -1,471 +1,374 @@
+[file name]: MsTable.vue
 <template>
-    <div class="ms-table-container h-full flex flex-col">
-        <!-- Bảng dữ liệu với virtual scroll để tối ưu hiệu suất -->
-        <a-table :dataSource="tableData" :columns="resizableColumns" :pagination="false"
-            :scroll="{ x: 'max-content', y: 'calc(100vh - 240px)' }" :custom-row="customRow" class="custom-ant-table flex-1"
-            size="middle" :loading="loading" bordered>
+    <div ref="tableContainerRef" class="ms-table-wrapper h-full flex flex-col overflow-hidden">
+        <!-- Bảng dữ liệu -->
+        <div class="table-content flex-1 overflow-auto">
+            <a-table :key="forceUpdateKey" :dataSource="tableData" :columns="columns" :pagination="false"
+                :scroll="{ y: 'calc(100vh - 254px)' }" :custom-row="customRow" class="ms-table" size="middle"
+                :loading="loading">
 
-            <!-- Custom header với chức năng checkbox và resize handles -->
-            <template #headerCell="{ column }">
-                <div class="header-cell-wrapper">
+                <!-- Header -->
+                <template #headerCell="{ column }">
+                    <div class="table-header-cell">
+                        {{ column.title }}
+                    </div>
+                </template>
+
+                <!-- Body cell -->
+                <template #bodyCell="{ column, record, index }">
+                    <!-- Checkbox selection -->
                     <template v-if="column.key === 'selection'">
-                        <MsCheckbox :modelValue="isAllSelected" @update:modelValue="toggleSelectAll" />
+                        <MsCheckbox :modelValue="selectedRowKeys.includes(record.key)"
+                            @update:modelValue="toggleSelectRow(record.key)" />
                     </template>
+
+                    <!-- STT -->
+                    <template v-else-if="column.key === 'index'">
+                        {{ index + 1 }}
+                    </template>
+
+                    <!-- Hành động (chỉ hiển thị khi hover/selected) -->
+                    <template v-else-if="column.key === 'action'">
+                        <div class="flex justify-center gap-1 action-buttons"
+                            :class="{ 'visible': isActionVisible(record.key) }">
+                            <button @click.stop="handleEdit(record)" class="action-btn">
+                                <div class="icon-edit"></div>
+                            </button>
+                            <button @click.stop="handleDelete(record)" class="action-btn">
+                                <div class="icon-delete-dark"></div>
+                            </button>
+                        </div>
+                    </template>
+
+                    <!-- Cột số tiền -->
+                    <template v-else-if="['originalPrice', 'depreciation', 'remainingValue'].includes(column.dataIndex)">
+                        <div class="text-right">
+                            {{ formatCurrency(record[column.dataIndex]) }}
+                        </div>
+                    </template>
+
+                    <!-- Cột số lượng -->
+                    <template v-else-if="column.dataIndex === 'quantity'">
+                        <div class="text-center">
+                            {{ record[column.dataIndex] }}
+                        </div>
+                    </template>
+
+                    <!-- Các cột khác -->
                     <template v-else>
-                        <span class="header-title">{{ column.title }}</span>
+                        <div class="table-cell-content">
+                            {{ record[column.dataIndex] }}
+                        </div>
                     </template>
-                    <div v-if="column.key !== 'selection' && column.key !== 'functionality'" class="resize-handle"
-                        @mousedown="startResize($event, column.key)">
-                    </div>
-                </div>
-            </template>
+                </template>
+            </a-table>
+        </div>
 
-            <!-- Custom cell cho checkbox -->
-            <template #bodyCell="{ column, record }">
-                <template v-if="column.key === 'selection'">
-                    <MsCheckbox :modelValue="selectedRowKeys.includes(record.key)"
-                        @update:modelValue="(checked) => toggleSelectRow(record.key, checked)" />
-                </template>
-                <template v-else-if="column.key === 'functionality'">
-                    <div class="flex justify-center">
-                        <span class="text-green-600">✅</span>
-                    </div>
-                </template>
-                <template
-                    v-else-if="column.dataIndex === 'remainingValue' || column.dataIndex === 'depreciation' || column.dataIndex === 'originalPrice'">
-                    <div class="text-right">{{ formatCurrency(record[column.dataIndex]) }}</div>
-                </template>
-                <template v-else>
-                    <div class="truncate" :title="record[column.dataIndex]">
-                        {{ record[column.dataIndex] }}
-                    </div>
-                </template>
-            </template>
-        </a-table>
-
-        <!-- Phân trang custom -->
-        <div class="pagination-custom border-t border-gray-200 bg-white px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center space-x-2 text-sm text-gray-700">
-                <span>Tổng số: <strong>{{ totalRecords }}</strong> bản ghi</span>
-            </div>
-            <div class="flex items-center space-x-2">
-                <span class="text-sm text-gray-700 mr-2">20</span>
-                <button @click="prevPage" :disabled="currentPage === 1"
-                    class="p-1 rounded border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                    &lt;
-                </button>
-                <button v-for="page in visiblePages" :key="page" @click="goToPage(page)" :class="[
-                    'px-3 py-1 rounded text-sm',
-                    currentPage === page
-                        ? 'bg-blue-600 text-white'
-                        : 'border border-gray-300 hover:bg-gray-50'
-                ]">
-                    {{ page }}
-                </button>
-                <button @click="nextPage" :disabled="currentPage === totalPages"
-                    class="p-1 rounded border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                    &gt;
-                </button>
+        <!-- Pagination -->
+        <div class="table-footer">
+            <div class="pagination-info">
+                Tổng số: <strong>{{ tableData.length }}</strong> bản ghi
             </div>
         </div>
     </div>
 </template>
-  
+
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { Table } from 'ant-design-vue'
 import MsCheckbox from '@/components/MsCheckbox.vue'
 
 const ATable = Table
 
-// Props và emits
+// Props - Thêm props để nhận dữ liệu từ bên ngoài
 const props = defineProps({
-    data: {
+    loading: { type: Boolean, default: false },
+    dataSource: {
         type: Array,
         default: () => []
     },
-    loading: {
-        type: Boolean,
-        default: false
+    columns: {
+        type: Array,
+        default: () => []
     }
 })
 
-const emit = defineEmits(['selection-change', 'row-click'])
+// Emits
+const emit = defineEmits(['selection-change', 'row-click', 'edit', 'delete'])
 
 // State
-const tableData = ref([])
 const selectedRowKeys = ref([])
-const currentPage = ref(1)
-const pageSize = 20
-const totalRecords = ref(200)
+const hoveredRowKey = ref(null)
+const forceUpdateKey = ref(0)
+const tableContainerRef = ref(null)
 
-// Column widths state (có thể kéo giãn)
-const columnWidths = ref({
-    selection:40,
-    index: 70,
-    assetCode: 130,
-    assetName: 160,
-    assetType: 120,
-    department: 150,
-    quantity: 70,
-    originalPrice: 130,
-    depreciation: 130,
-    remainingValue: 130,
-    functionality: 90
-})
-
-// Resize state
-const isResizing = ref(false)
-const resizingColumn = ref('')
-const startX = ref(0)
-const startWidth = ref(0)
-
-// Columns definition với độ rộng động
-const columns = ref([
-    {
-        title: '',
-        key: 'selection',
-        dataIndex: 'selection',
-        fixed: 'left',
-        align: 'center'
-    },
-    {
-        title: 'STT',
-        dataIndex: 'index',
-        key: 'index',
-        fixed: 'left',
-        align: 'center'
-    },
-    {
-        title: 'Mã tài sản',
-        dataIndex: 'assetCode',
-        key: 'assetCode'
-    },
-    {
-        title: 'Tên tài sản',
-        dataIndex: 'assetName',
-        key: 'assetName'
-    },
-    {
-        title: 'Loại tài sản',
-        dataIndex: 'assetType',
-        key: 'assetType'
-    },
-    {
-        title: 'Bộ phận sử dụng',
-        dataIndex: 'department',
-        key: 'department'
-    },
-    {
-        title: 'Số lượng',
-        dataIndex: 'quantity',
-        key: 'quantity',
-        align: 'center'
-    },
-    {
-        title: 'Nguyên giá',
-        dataIndex: 'originalPrice',
-        key: 'originalPrice',
-        align: 'right'
-    },
-    {
-        title: 'HM/KH lũy kế',
-        dataIndex: 'depreciation',
-        key: 'depreciation',
-        align: 'right'
-    },
-    {
-        title: 'Giá trị còn lại',
-        dataIndex: 'remainingValue',
-        key: 'remainingValue',
-        align: 'right'
-    },
-    {
-        title: 'Chức năng',
-        key: 'functionality',
-        fixed: 'right',
-        align: 'center'
-    }
+// Dữ liệu mẫu (chỉ dùng khi không có dataSource từ props)
+const defaultTableData = ref([
+    { key: 1, assetCode: '55HTWNT2/2022', assetName: 'Dell Inspiron 3467', assetType: 'Máy vi tính xách tay', department: 'Phòng Hành chính Kế toán', quantity: 1, originalPrice: 20000000, depreciation: 894000, remainingValue: 19106000 },
+    { key: 2, assetCode: 'MXT88618', assetName: 'Máy tính xách tay Fujitsu', assetType: 'Máy vi tính xách tay', department: 'Phòng Hành chính Kế toán', quantity: 1, originalPrice: 10000000, depreciation: 1225000, remainingValue: 8775000 },
+    { key: 3, assetCode: '37HTWNT2/2022', assetName: 'Dell Inspiron 3467', assetType: 'Máy vi tính xách tay', department: 'Phòng Hành chính Kế toán', quantity: 4, originalPrice: 40000000, depreciation: 1730000, remainingValue: 38270000 },
+    { key: 4, assetCode: 'MXT8866', assetName: 'Máy tính xách tay Fujitsu', assetType: 'Máy vi tính xách tay', department: 'Phòng Thư Ký', quantity: 1, originalPrice: 5000000, depreciation: 1646000, remainingValue: 3354000 },
+    { key: 5, assetCode: '14HTWNT2/2019', assetName: 'Dell Latitude E 5450', assetType: 'Máy vi tính xách tay', department: 'Phòng Hành chính Kế toán', quantity: 1, originalPrice: 10000000, depreciation: 2456000, remainingValue: 7544000 },
+    { key: 6, assetCode: 'DBP03F2/2017', assetName: 'DEL Inspiron 3467', assetType: 'Máy vi tính xách tay', department: 'Phòng Hành chính Kế toán', quantity: 20, originalPrice: 50000000, depreciation: 913000, remainingValue: 49087000 },
+    { key: 7, assetCode: 'MXT8869', assetName: 'Máy tính xách tay Fujitsu', assetType: 'Máy vi tính xách tay', department: 'Phòng Hành chính Kế toán', quantity: 1, originalPrice: 50000000, depreciation: 3929000, remainingValue: 46071000 },
+    { key: 8, assetCode: '49HTWNT2/2022', assetName: 'Dell Inspiron 3467', assetType: 'Máy vi tính xách tay', department: 'Phòng Tài chính Tổng hợp', quantity: 1, originalPrice: 4000000, depreciation: 432000, remainingValue: 3568000 },
+    { key: 9, assetCode: '33HTWNT2/2022', assetName: 'Dell Inspiron 3467', assetType: 'Máy vi tính xách tay', department: 'Phòng Tài chính Tổng hợp', quantity: 1, originalPrice: 20000000, depreciation: 3400000, remainingValue: 16600000 },
+    { key: 10, assetCode: '22HTWNT2/2019', assetName: 'Dell Latitude E 5450', assetType: 'Máy vi tính xách tay', department: 'Phòng Tài chính Tổng hợp', quantity: 1, originalPrice: 40000000, depreciation: 3091000, remainingValue: 36909000 }
 ])
 
-// Computed columns với độ rộng động
-const resizableColumns = computed(() => {
-    return columns.value.map(column => ({
-        ...column,
-        width: columnWidths.value[column.key] || 100,
-        ellipsis: column.key !== 'selection' && column.key !== 'functionality'
-    }))
+// Columns mặc định (chỉ dùng khi không có columns từ props)
+const defaultColumns = [
+    { title: '', key: 'selection', dataIndex: 'selection', width: 50, align: 'center' },
+    { title: 'STT', key: 'index', width: 60, align: 'center' },
+    { title: 'Mã tài sản', dataIndex: 'assetCode', key: 'assetCode', minWidth: 140 },
+    { title: 'Tên tài sản', dataIndex: 'assetName', key: 'assetName', minWidth: 180 },
+    { title: 'Loại tài sản', dataIndex: 'assetType', key: 'assetType', minWidth: 140 },
+    { title: 'Bộ phận sử dụng', dataIndex: 'department', key: 'department', minWidth: 160 },
+    { title: 'Số lượng', dataIndex: 'quantity', key: 'quantity', width: 80, align: 'center' },
+    { title: 'Nguyên giá', dataIndex: 'originalPrice', key: 'originalPrice', width: 120, align: 'right' },
+    { title: 'HM/KH lũy kế', dataIndex: 'depreciation', key: 'depreciation', width: 120, align: 'right' },
+    { title: 'Giá trị còn lại', dataIndex: 'remainingValue', key: 'remainingValue', width: 120, align: 'right' },
+    { title: 'Chức năng', key: 'action', width: 100, align: 'center' }
+]
+
+// Computed để sử dụng dữ liệu từ props hoặc mặc định
+const tableData = computed(() => {
+    return props.dataSource && props.dataSource.length > 0 ? props.dataSource : defaultTableData.value
 })
 
-// Computed
-const totalPages = computed(() => Math.ceil(totalRecords.value / pageSize))
-const visiblePages = computed(() => {
-    const pages = []
-    const start = Math.max(1, currentPage.value - 1)
-    const end = Math.min(totalPages.value, start + 2)
-
-    for (let i = start; i <= end; i++) {
-        pages.push(i)
-    }
-    return pages
+const columns = computed(() => {
+    return props.columns && props.columns.length > 0 ? props.columns : defaultColumns
 })
 
-const isAllSelected = computed(() => {
-    if (tableData.value.length === 0) return false
-    return tableData.value.every(item => selectedRowKeys.value.includes(item.key))
-})
-
-// Methods
-const formatCurrency = (value) => {
-    if (!value) return '0'
-    return new Intl.NumberFormat('vi-VN').format(value)
+// Hành động hiển thị
+const isActionVisible = (rowKey) => {
+    return hoveredRowKey.value === rowKey || selectedRowKeys.value.includes(rowKey)
 }
 
-const generateSampleData = () => {
-    const sampleData = []
-    // Tạo 200 bản ghi để test scroll
-    for (let i = 1; i <= 200; i++) {
-        const record = {
-            key: i,
-            index: i,
-            assetCode: `ASSET${1000 + i}`,
-            assetName: `Tài sản ${i}`,
-            assetType: i % 3 === 0 ? 'Máy vi tính' : i % 3 === 1 ? 'Thiết bị văn phòng' : 'Nội thất',
-            department: `Phòng ${['A', 'B', 'C', 'D'][i % 4]}`,
-            quantity: Math.floor(Math.random() * 10) + 1,
-            originalPrice: Math.floor(Math.random() * 100000000) + 1000000,
-            depreciation: Math.floor(Math.random() * 20000000) + 100000,
-            remainingValue: Math.floor(Math.random() * 80000000) + 1000000
+// Custom row với hover tracking
+const customRow = (record) => ({
+    onClick: (event) => {
+        if (!event.target.closest('.action-btn')) {
+            emit('row-click', record)
         }
-        // Tính toán giá trị còn lại
-        record.remainingValue = record.originalPrice - record.depreciation
-        sampleData.push(record)
+    },
+    onMouseenter: () => {
+        hoveredRowKey.value = record.key
+    },
+    onMouseleave: () => {
+        hoveredRowKey.value = null
     }
-    tableData.value = sampleData
-    totalRecords.value = 200
-}
+})
 
-// Resize methods
-const startResize = (event, columnKey) => {
-    isResizing.value = true
-    resizingColumn.value = columnKey
-    startX.value = event.clientX
-    startWidth.value = columnWidths.value[columnKey]
-
-    event.preventDefault()
-    event.stopPropagation()
-
-    document.addEventListener('mousemove', handleResize)
-    document.addEventListener('mouseup', stopResize)
-}
-
-const handleResize = (event) => {
-    if (!isResizing.value) return
-
-    const diff = event.clientX - startX.value
-    const newWidth = Math.max(50, startWidth.value + diff) // Minimum width 50px
-
-    columnWidths.value[resizingColumn.value] = newWidth
-}
-
-const stopResize = () => {
-    isResizing.value = false
-    resizingColumn.value = ''
-    document.removeEventListener('mousemove', handleResize)
-    document.removeEventListener('mouseup', stopResize)
-}
-
-const toggleSelectAll = (checked) => {
-    if (checked) {
-        selectedRowKeys.value = tableData.value.map(item => item.key)
+// Xử lý sự kiện
+const toggleSelectRow = (key) => {
+    const index = selectedRowKeys.value.indexOf(key)
+    if (index > -1) {
+        selectedRowKeys.value.splice(index, 1)
     } else {
-        selectedRowKeys.value = []
+        selectedRowKeys.value.push(key)
     }
-    emitSelectionChange()
-}
-
-const toggleSelectRow = (key, checked) => {
-    if (checked) {
-        if (!selectedRowKeys.value.includes(key)) {
-            selectedRowKeys.value.push(key)
-        }
-    } else {
-        const index = selectedRowKeys.value.indexOf(key)
-        if (index > -1) {
-            selectedRowKeys.value.splice(index, 1)
-        }
-    }
-    emitSelectionChange()
-}
-
-const emitSelectionChange = () => {
     emit('selection-change', selectedRowKeys.value)
 }
 
-const customRow = (record) => {
-    return {
-        onClick: () => {
-            emit('row-click', record)
+const handleEdit = (record) => {
+    emit('edit', record)
+}
+
+const handleDelete = (record) => {
+    if (confirm(`Bạn có chắc chắn muốn xóa tài sản "${record.assetName}"?`)) {
+        emit('delete', record)
+    }
+}
+
+// Format currency
+const formatCurrency = (value) => {
+    if (!value && value !== 0) return '0'
+    return new Intl.NumberFormat('vi-VN').format(value)
+}
+
+// Force update table khi container thay đổi kích thước
+const forceUpdateTable = () => {
+    forceUpdateKey.value += 1
+}
+
+// Sử dụng ResizeObserver để theo dõi thay đổi kích thước container
+let resizeObserver = null
+
+onMounted(() => {
+    // Tạo ResizeObserver để theo dõi thay đổi kích thước
+    if ('ResizeObserver' in window) {
+        resizeObserver = new ResizeObserver(() => {
+            // Debounce để tránh gọi quá nhiều lần
+            setTimeout(() => {
+                forceUpdateTable()
+            }, 100)
+        })
+
+        if (tableContainerRef.value) {
+            resizeObserver.observe(tableContainerRef.value)
         }
     }
-}
 
-const goToPage = (page) => {
-    currentPage.value = page
-    // Thực tế sẽ gọi API để lấy dữ liệu trang mới
-}
-
-const prevPage = () => {
-    if (currentPage.value > 1) {
-        currentPage.value--
-        // Thực tế sẽ gọi API để lấy dữ liệu trang mới
-    }
-}
-
-const nextPage = () => {
-    if (currentPage.value < totalPages.value) {
-        currentPage.value++
-        // Thực tế sẽ gọi API để lấy dữ liệu trang mới
-    }
-}
-
-// Cleanup
-onUnmounted(() => {
-    document.removeEventListener('mousemove', handleResize)
-    document.removeEventListener('mouseup', stopResize)
+    // Cũng force update sau khi mounted để đảm bảo table render đúng
+    setTimeout(() => {
+        forceUpdateTable()
+    }, 200)
 })
 
-// Lifecycle
-onMounted(() => {
-    generateSampleData()
+onUnmounted(() => {
+    if (resizeObserver && tableContainerRef.value) {
+        resizeObserver.unobserve(tableContainerRef.value)
+        resizeObserver.disconnect()
+    }
 })
 </script>
-  
+
 <style scoped>
-.ms-table-container {
+/* Giữ nguyên tất cả style */
+.ms-table-wrapper {
     height: 100%;
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
-.custom-ant-table {
+.table-content {
     flex: 1;
-    overflow: hidden;
+    overflow: auto;
+    min-width: 0;
 }
 
-/* Header với resize handle */
-.header-cell-wrapper {
-    position: relative;
+.table-header-cell {
+    font-weight: 600;
+    color: #374151;
+    background-color: #f9fafb;
+    padding: 12px 8px;
+    text-align: center;
+    white-space: nowrap;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table-cell-content {
+    padding: 12px 8px;
+    color: #4b5563;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.action-buttons {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.action-buttons.visible {
+    opacity: 1;
+}
+
+.action-btn {
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    padding: 0 4px;
+    padding: 0;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.header-title {
-    flex: 1;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.action-btn:hover {
+    border-color: #d1d5db;
+    background-color: #f3f4f6;
 }
 
-.resize-handle {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    cursor: col-resize;
-    background-color: transparent;
-    transition: background-color 0.2s;
+.table-footer {
+    border-top: 1px solid #e5e7eb;
+    background: white;
+    padding: 12px 16px;
+    flex-shrink: 0;
 }
 
-.resize-handle:hover {
-    background-color: #1890ff;
+.pagination-info {
+    font-size: 14px;
+    color: #6b7280;
 }
 
-/* Cải thiện hiển thị table */
-.custom-ant-table :deep(.ant-table) {
-    font-size: 12px;
+.ms-table {
+    width: 100% !important;
+    table-layout: auto !important;
 }
 
-.custom-ant-table :deep(.ant-table-thead > tr > th) {
-    background-color: #f8fafc;
-    font-weight: 600;
-    color: #374151;
+.ms-table .ant-table {
+    width: 100% !important;
+    table-layout: auto !important;
+}
+
+.ms-table .ant-table-container {
+    width: 100% !important;
+}
+
+.ms-table .ant-table-thead>tr>th {
+    border-right: none !important;
     border-bottom: 1px solid #e5e7eb;
-    padding: 8px 4px;
-    white-space: nowrap;
-    position: relative;
-    user-select: none;
-}
-
-.custom-ant-table :deep(.ant-table-tbody > tr > td) {
-    padding: 8px 4px;
-    border-bottom: 1px solid #f3f4f6;
-    color: #4b5563;
-    font-size: 12px;
-}
-
-.custom-ant-table :deep(.ant-table-tbody > tr:hover > td) {
     background-color: #f9fafb;
 }
 
-.custom-ant-table :deep(.ant-table-pagination) {
+.ms-table .ant-table-tbody>tr>td {
+    border-right: none !important;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.ms-table .ant-table-selection-column {
     display: none !important;
 }
 
-/* Fixed columns styling */
-.custom-ant-table :deep(.ant-table-cell-fix-left),
-.custom-ant-table :deep(.ant-table-cell-fix-right) {
-    background-color: white;
-    z-index: 1;
+.ms-table .ant-table-selection-col {
+    display: none !important;
 }
 
-/* Scrollbar styling */
-.custom-ant-table :deep(.ant-table-body) {
-    scrollbar-width: thin;
-    scrollbar-color: #c1c1c1 #f1f1f1;
+.ms-table .ant-checkbox-wrapper {
+    display: none !important;
 }
 
-.custom-ant-table :deep(.ant-table-body::-webkit-scrollbar) {
-    height: 8px;
-    width: 8px;
+.ms-table .ant-table-tbody>tr:hover>td {
+    background-color: #f9fafb;
 }
 
-.custom-ant-table :deep(.ant-table-body::-webkit-scrollbar-track) {
-    background: #f1f1f1;
+.ms-table .ant-table-cell[align='center'] .text-center {
+    text-align: center;
 }
 
-.custom-ant-table :deep(.ant-table-body::-webkit-scrollbar-thumb) {
-    background: #c1c1c1;
-    border-radius: 4px;
+.ms-table .ant-table-cell[align='right'] .text-right {
+    text-align: right;
 }
 
-.custom-ant-table :deep(.ant-table-body::-webkit-scrollbar-thumb:hover) {
-    background: #a8a8a8;
+.ms-table .ant-table-thead>tr>th,
+.ms-table .ant-table-tbody>tr>td {
+    min-width: 0 !important;
+    max-width: none !important;
 }
 
-/* Cell content */
-.truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.ms-table .ant-table-content {
+    overflow: auto !important;
 }
 
-/* Pagination */
-.pagination-custom {
-    flex-shrink: 0;
-    border-top: 1px solid #e5e7eb;
-    background-color: white;
-    padding: 12px 16px;
-    white-space: nowrap;
+.ms-table .ant-table-body {
+    overflow: auto !important;
 }
 
-/* Resizing cursor */
-.resizing * {
-    cursor: col-resize !important;
+@media (max-width: 1400px) {
+
+    .ms-table .ant-table-thead>tr>th,
+    .ms-table .ant-table-tbody>tr>td {
+        white-space: nowrap;
+    }
 }
 </style>
