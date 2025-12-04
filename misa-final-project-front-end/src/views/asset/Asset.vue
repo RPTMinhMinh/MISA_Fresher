@@ -1,9 +1,8 @@
-[file name]: Asset.vue
 <template>
     <main class="content flex-1 min-h-0 bg-gray-100">
-        <div class="h-full flex flex-col p-4 space-y-4">
+        <div class="h-full flex flex-col p-4">
 
-            <div class="header-content rounded-lg flex-shrink-0">
+            <div class="header-content rounded-lg flex-shrink-0 mb-3">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
 
                     <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">

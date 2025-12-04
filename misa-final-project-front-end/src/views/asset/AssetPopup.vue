@@ -1,60 +1,91 @@
+[file name]: AssetPopup.vue
+[file content begin]
 <template>
     <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" @click.self="closePopup">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-[900px]">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-[1000px] max-h-[94vh] overflow-hidden flex flex-col">
             <!-- Header - Hiển thị tiêu đề theo mode -->
-            <div class="px-6 py-4 border-b border-gray-200">
-                <h2 class="text-lg font-semibold text-gray-800">{{ mode === 'add' ? 'Thêm tài sản' : 'Sửa tài sản' }}</h2>
+            <div class="px-6 mt-4 flex-shrink-0">
+                <h2 class="text-md font-semibold text-gray-800">{{ mode === 'add' ? 'Thêm tài sản' : 'Sửa tài sản' }}</h2>
             </div>
 
-            <!-- Body -->
-            <div class="p-6">
-                <div class="grid grid-cols-2 gap-x-5 gap-y-4">
-                    <!-- Cột trái -->
-                    <div class="space-y-4">
-                        <MsInput v-model="form.assetCode" label="Mã tài sản" placeholder="TS00001" />
-                        <MsDropdown 
-                            v-model="form.departmentCode" 
-                            :options="departmentOptions" 
-                            label="Mã bộ phận sử dụng *" 
-                            placeholder="Chọn mã bộ phận sử dụng"
-                        />
-                        <MsDropdown 
-                            v-model="form.assetTypeCode" 
-                            :options="assetTypeOptions" 
-                            label="Mã loại tài sản *" 
-                            placeholder="Chọn mã loại tài sản"
-                        />
-                        <MsInput v-model="form.quantity" label="Số lượng *" placeholder="01" type="number" />
-                        <MsInput v-model="form.purchaseDate" label="Ngày mua *" placeholder="25/08/2021" />
-                        <MsInput v-model="form.usefulLife" label="Số năm sử dụng *" placeholder="10" type="number" />
+            <!-- Body với scroll và layout 3 cột -->
+            <div class="p-6 overflow-y-auto flex-grow">
+                <div class="grid grid-cols-3 gap-x-4 gap-y-3">
+                    <!-- Các trường chiếm 1 cột (1/3) -->
+                    <div class="col-span-1">
+                        <MsInput v-model="form.assetCode" label="Mã tài sản" placeholder="TS00001" required/>
                     </div>
 
-                    <!-- Cột phải -->
-                    <div class="space-y-4">
-                        <MsInput v-model="form.assetName" label="Tên tài sản *" placeholder="Nhập tên tài sản" />
-                        <MsInput 
-                            v-model="form.departmentName" 
-                            label="Tên bộ phận sử dụng" 
-                            placeholder="Phòng Hành chính Tổng hợp" 
-                            :disabled="true" 
-                        />
-                        <MsInput 
-                            v-model="form.assetTypeName" 
-                            label="Tên loại tài sản" 
-                            placeholder="Máy tính xách tay" 
-                            :disabled="true" 
-                        />
-                        <MsInput v-model="form.originalPrice" label="Nguyên giá *" placeholder="10.000.000" />
-                        <MsInput v-model="form.startDate" label="Ngày bắt đầu sử dụng *" placeholder="25/08/2021" />
-                        <MsInput v-model="form.annualDepreciation" label="Giá trị hao mòn năm *" placeholder="1.000.000" />
-                        <MsInput v-model="form.depreciationRate" label="Tỷ lệ hao mòn (%) *" placeholder="6,67" />
-                        <MsInput v-model="form.trackingYear" label="Năm theo dõi" placeholder="2021" />
+                    <!-- Trường Tên tài sản chiếm 2 cột (2/3) -->
+                    <div class="col-span-2">
+                        <MsInput v-model="form.assetName" label="Tên tài sản" required placeholder="Nhập tên tài sản" />
                     </div>
+
+                    <div class="col-span-1">
+                        <MsDropdown v-model="form.departmentCode" :options="departmentOptions" label="Mã bộ phận sử dụng" required
+                            placeholder="Chọn mã bộ phận sử dụng" />
+                    </div>
+
+                    <!-- Trường Tên bộ phận sử dụng chiếm 2 cột (2/3) -->
+                    <div class="col-span-2">
+                        <MsInput v-model="form.departmentName" label="Tên bộ phận sử dụng"
+                            placeholder="Phòng Hành chính Tổng hợp" :disabled="true" />
+                    </div>
+
+                    <div class="col-span-1">
+                        <MsDropdown v-model="form.assetTypeCode" :options="assetTypeOptions" label="Mã loại tài sản" required=""
+                            placeholder="Chọn mã loại tài sản" />
+                    </div>
+                    <!-- Trường Tên loại tài sản chiếm 2 cột (2/3) -->
+                    <div class="col-span-2">
+                        <MsInput v-model="form.assetTypeName" label="Tên loại tài sản" placeholder="Máy tính xách tay"
+                            :disabled="true" />
+                    </div>
+
+                    <div class="col-span-1">
+                        <MsInputNumber v-model="form.quantity" label="Số lượng" required placeholder="01" :decimal-places="0" />
+                    </div>
+
+                    <!-- Các trường chiếm 1 cột -->
+                    <div class="col-span-1">
+                        <MsInputNumber v-model="form.originalPrice" label="Nguyên giá" required :decimal-places="0" />
+                    </div>
+
+                    <div class="col-span-1">
+                        <MsInputNumber v-model="form.depreciationRate" type="number"  label="Tỷ lệ hao mòn (%)" required :decimal-places="2" />
+                    </div>
+
+                    <div class="col-span-1">
+                        <MsInput v-model="form.purchaseDate" label="Ngày mua" required placeholder="25/08/2021" />
+                    </div>
+
+                    <div class="col-span-1">
+                        <MsInput v-model="form.startDate" label="Ngày bắt đầu sử dụng" required placeholder="25/08/2021" />
+                    </div>
+
+                    <div class="col-span-1">
+                        <MsInputNumber v-model="form.trackingYear" label="Năm theo dõi" placeholder="2021" :use-thousand-separator="false"/>
+                    </div>
+
+                    <div class="col-span-1">
+                        <MsInputNumber v-model="form.usefulLife" label="Số năm sử dụng"  required placeholder="10" :decimal-places="0" />
+                    </div>
+
+                    <div class="col-span-1">
+                        <MsInputNumber v-model="form.annualDepreciation" :decimal-places="0" label="Giá trị hao mòn năm" required placeholder="1.000.000" />
+                    </div>
+
+
+
+
+
+                    <!-- Ô trống để căn chỉnh layout -->
+                    <div class="col-span-1"></div>
                 </div>
             </div>
 
-            <!-- Footer -->
-            <div class="px-6 py-4 border-t border-gray-200 flex justify-end gap-3">
+            <!-- Footer cố định ở dưới -->
+            <div class="px-6 py-4 border-t border-gray-200 flex justify-end gap-3 flex-shrink-0">
                 <MsButton variant="outline" @click="closePopup" class="px-6">Hủy</MsButton>
                 <MsButton variant="main" @click="save" class="px-6">Lưu</MsButton>
             </div>
@@ -67,6 +98,7 @@ import { reactive, watch, onMounted } from 'vue';
 import MsInput from '@/components/MsInput.vue';
 import MsButton from '@/components/MsButton.vue';
 import MsDropdown from '@/components/MsDropdown.vue';
+import MsInputNumber from '@/components/MsInputNumber.vue'
 
 const props = defineProps({
     mode: {
@@ -115,7 +147,7 @@ const resetForm = () => {
         startDate: '25/08/2021',
         usefulLife: '10',
         annualDepreciation: '',
-        depreciationRate: '6,67',
+        depreciationRate: '',
         trackingYear: '2021',
     });
 };
@@ -125,16 +157,16 @@ const form = reactive({
     assetCode: '',
     assetName: '',
     departmentCode: '',
-    departmentName: 'Phòng Hành chính Tổng hợp',
+    departmentName: '',
     assetTypeCode: '',
-    assetTypeName: 'Máy tính xách tay',
+    assetTypeName: '',
     quantity: '',
     originalPrice: '',
     purchaseDate: '25/08/2021',
     startDate: '25/08/2021',
     usefulLife: '10',
     annualDepreciation: '',
-    depreciationRate: '6,67',
+    depreciationRate: '',
     trackingYear: '2021',
 });
 
@@ -189,7 +221,7 @@ onMounted(() => {
 // Watch để cập nhật form khi assetData thay đổi
 watch(() => props.assetData, (newData) => {
     console.log('AssetPopup received new assetData:', newData);
-    
+
     if (newData) {
         // Điền dữ liệu từ record vào form (chế độ edit)
         form.assetCode = newData.assetCode || '';
@@ -217,11 +249,6 @@ watch(() => props.mode, (newMode) => {
 </script>
 
 <style scoped>
-/* Custom spacing theo đúng ảnh - 16px giữa các trường */
-.space-y-4>*+* {
-    margin-top: 16px;
-}
-
 /* Đảm bảo chiều cao input nhất quán 36px */
 :deep(.ms-input .ant-input),
 :deep(.ms-dropdown .ant-select-selector) {
@@ -243,13 +270,34 @@ watch(() => props.mode, (newMode) => {
     line-height: 34px !important;
 }
 
-/* Đảm bảo khoảng cách giữa hai cột là 20px */
-.gap-x-5 {
-    gap: 20px;
+/* Đảm bảo khoảng cách giữa các cột là 16px */
+.gap-x-4 {
+    gap: 16px;
 }
 
-/* Đảm bảo khoảng cách giữa các hàng là 16px */
-.gap-y-4 {
-    gap: 16px;
+/* Đảm bảo khoảng cách giữa các hàng là 12px */
+.gap-y-3 {
+    gap: 12px;
+}
+
+/* Tùy chỉnh chiều cao các container input */
+.col-span-1,
+.col-span-2 {
+    display: flex;
+    flex-direction: column;
+    min-height: 80px;
+    /* Đảm bảo có đủ không gian cho label và input */
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+    .grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .col-span-1,
+    .col-span-2 {
+        grid-column: span 1 !important;
+    }
 }
 </style>
