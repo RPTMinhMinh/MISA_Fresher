@@ -1,5 +1,3 @@
-[file name]: AssetPopup.vue
-[file content begin]
 <template>
     <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" @click.self="closePopup">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-[1000px] max-h-[94vh] overflow-hidden flex flex-col">
@@ -8,15 +6,12 @@
                 <h2 class="text-md font-semibold text-gray-800">{{ mode === 'add' ? 'Thêm tài sản' : 'Sửa tài sản' }}</h2>
             </div>
 
-            <!-- Body với scroll và layout 3 cột -->
             <div class="p-6 overflow-y-auto flex-grow">
                 <div class="grid grid-cols-3 gap-x-4 gap-y-3">
-                    <!-- Các trường chiếm 1 cột (1/3) -->
                     <div class="col-span-1">
                         <MsInput v-model="form.assetCode" label="Mã tài sản" placeholder="TS00001" required/>
                     </div>
 
-                    <!-- Trường Tên tài sản chiếm 2 cột (2/3) -->
                     <div class="col-span-2">
                         <MsInput v-model="form.assetName" label="Tên tài sản" required placeholder="Nhập tên tài sản" />
                     </div>
@@ -26,7 +21,6 @@
                             placeholder="Chọn mã bộ phận sử dụng" />
                     </div>
 
-                    <!-- Trường Tên bộ phận sử dụng chiếm 2 cột (2/3) -->
                     <div class="col-span-2">
                         <MsInput v-model="form.departmentName" label="Tên bộ phận sử dụng"
                             placeholder="Phòng Hành chính Tổng hợp" :disabled="true" />
@@ -36,7 +30,7 @@
                         <MsDropdown v-model="form.assetTypeCode" :options="assetTypeOptions" label="Mã loại tài sản" required=""
                             placeholder="Chọn mã loại tài sản" />
                     </div>
-                    <!-- Trường Tên loại tài sản chiếm 2 cột (2/3) -->
+
                     <div class="col-span-2">
                         <MsInput v-model="form.assetTypeName" label="Tên loại tài sản" placeholder="Máy tính xách tay"
                             :disabled="true" />
@@ -46,7 +40,6 @@
                         <MsInputNumber v-model="form.quantity" label="Số lượng" required placeholder="01" :decimal-places="0" />
                     </div>
 
-                    <!-- Các trường chiếm 1 cột -->
                     <div class="col-span-1">
                         <MsInputNumber v-model="form.originalPrice" label="Nguyên giá" required :decimal-places="0" />
                     </div>
@@ -75,16 +68,10 @@
                         <MsInputNumber v-model="form.annualDepreciation" :decimal-places="0" label="Giá trị hao mòn năm" required placeholder="1.000.000" />
                     </div>
 
-
-
-
-
-                    <!-- Ô trống để căn chỉnh layout -->
                     <div class="col-span-1"></div>
                 </div>
             </div>
 
-            <!-- Footer cố định ở dưới -->
             <div class="px-6 py-4 border-t border-gray-200 flex justify-end gap-3 flex-shrink-0">
                 <MsButton variant="outline" @click="closePopup" class="px-6">Hủy</MsButton>
                 <MsButton variant="main" @click="save" class="px-6">Lưu</MsButton>
@@ -170,7 +157,6 @@ const form = reactive({
     trackingYear: '2021',
 });
 
-// Watch để cập nhật tên khi chọn mã
 watch(() => form.departmentCode, (newVal) => {
     const selected = departmentOptions.find(opt => opt.value === newVal);
     if (selected) {
@@ -194,7 +180,6 @@ const closePopup = () => {
 };
 
 const save = () => {
-    // Validate các trường bắt buộc
     const requiredFields = [
         'assetCode', 'assetName', 'departmentCode', 'assetTypeCode',
         'quantity', 'originalPrice', 'purchaseDate', 'startDate',
@@ -212,18 +197,15 @@ const save = () => {
     closePopup();
 };
 
-// Khi component được mount
 onMounted(() => {
     console.log('AssetPopup mounted with mode:', props.mode);
     console.log('AssetPopup mounted with assetData:', props.assetData);
 });
 
-// Watch để cập nhật form khi assetData thay đổi
 watch(() => props.assetData, (newData) => {
     console.log('AssetPopup received new assetData:', newData);
 
     if (newData) {
-        // Điền dữ liệu từ record vào form (chế độ edit)
         form.assetCode = newData.assetCode || '';
         form.assetName = newData.assetName || '';
         form.departmentCode = newData.department || '';
@@ -234,12 +216,10 @@ watch(() => props.assetData, (newData) => {
         form.originalPrice = formatCurrency(newData.originalPrice) || '';
         form.annualDepreciation = formatCurrency(newData.depreciation) || '';
     } else {
-        // Reset form về giá trị mặc định (chế độ add)
         resetForm();
     }
 }, { immediate: true });
 
-// Watch để theo dõi mode thay đổi
 watch(() => props.mode, (newMode) => {
     console.log('AssetPopup mode changed to:', newMode);
     if (newMode === 'add') {
@@ -249,7 +229,6 @@ watch(() => props.mode, (newMode) => {
 </script>
 
 <style scoped>
-/* Đảm bảo chiều cao input nhất quán 36px */
 :deep(.ms-input .ant-input),
 :deep(.ms-dropdown .ant-select-selector) {
     height: 36px !important;
@@ -264,23 +243,18 @@ watch(() => props.mode, (newMode) => {
     border-color: #d9d9d9 !important;
 }
 
-/* Đảm bảo dropdown cũng có chiều cao 36px */
 :deep(.ms-dropdown .ant-select-selection-item),
 :deep(.ms-dropdown .ant-select-selection-placeholder) {
     line-height: 34px !important;
 }
-
-/* Đảm bảo khoảng cách giữa các cột là 16px */
 .gap-x-4 {
     gap: 16px;
 }
 
-/* Đảm bảo khoảng cách giữa các hàng là 12px */
 .gap-y-3 {
     gap: 12px;
 }
 
-/* Tùy chỉnh chiều cao các container input */
 .col-span-1,
 .col-span-2 {
     display: flex;
