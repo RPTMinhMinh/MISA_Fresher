@@ -23,6 +23,10 @@ builder.Services.AddScoped<IAssetTypeRepository, AssetTypeRepository>();
 
 builder.Services.AddScoped<IAssetTypeService, AssetTypeService>();
 
+builder.Services.AddScoped<IAssetRepository, AssetRepository>();
+
+builder.Services.AddScoped<IAssetService,  AssetService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

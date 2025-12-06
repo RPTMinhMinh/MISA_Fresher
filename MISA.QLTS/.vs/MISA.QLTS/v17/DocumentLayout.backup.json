@@ -3,92 +3,120 @@
   "WorkspaceRootPath": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.infrastructure\\repositories\\assettyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|solutionrelative:misa.qlts.infrastructure\\repositories\\assettyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\services\\assetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\services\\assetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\services\\assettypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\services\\assettypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\mappers\\assetmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\mappers\\assetmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.infrastructure\\repositories\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|solutionrelative:misa.qlts.infrastructure\\repositories\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\interfaces\\services\\iassetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\interfaces\\services\\iassetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\mappers\\assettypemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\mappers\\assettypemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.infrastructure\\repositories\\assetrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|solutionrelative:misa.qlts.infrastructure\\repositories\\assetrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\mappers\\departmentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\mappers\\departmentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\interfaces\\repositories\\iassetrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\interfaces\\repositories\\iassetrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\assettypedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\assettypedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\updateassetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\updateassetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\entities\\assettype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\entities\\assettype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\assetresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\assetresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.api\\controllers\\assettypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|solutionrelative:misa.qlts.api\\controllers\\assettypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\cloneassetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\cloneassetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\interfaces\\repositories\\iassettyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\interfaces\\repositories\\iassettyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\services\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\services\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|solutionrelative:misa.qlts.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|solutionrelative:misa.qlts.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.infrastructure\\data\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|solutionrelative:misa.qlts.infrastructure\\data\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\deleteassetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\deleteassetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\departmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\departmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\interfaces\\services\\idepartmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\interfaces\\services\\idepartmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\createassetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\createassetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\interfaces\\repositories\\idepartmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\interfaces\\repositories\\idepartmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\common\\paginationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\common\\paginationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\entities\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\entities\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\common\\paginatedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\common\\paginatedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|solutionrelative:misa.qlts.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.api\\controllers\\baseapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|solutionrelative:misa.qlts.api\\controllers\\baseapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.api\\controllers\\assettypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|solutionrelative:misa.qlts.api\\controllers\\assettypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.api\\controllers\\assetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|solutionrelative:misa.qlts.api\\controllers\\assetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\services\\assettypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\services\\assettypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\services\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\services\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\interfaces\\repositories\\idepartmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\interfaces\\repositories\\idepartmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\interfaces\\repositories\\iassettyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\interfaces\\repositories\\iassettyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\dtos\\common\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\dtos\\common\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.api\\misa.qlts.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|solutionrelative:misa.qlts.api\\misa.qlts.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\entities\\asset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\entities\\asset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.infrastructure\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|solutionrelative:misa.qlts.infrastructure\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.infrastructure\\repositories\\assettyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|solutionrelative:misa.qlts.infrastructure\\repositories\\assettyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.infrastructure\\repositories\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E39A4494-F30E-44AA-8EE1-A4D8193FB803}|MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj|solutionrelative:misa.qlts.infrastructure\\repositories\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\interfaces\\services\\idepartmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\interfaces\\services\\idepartmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\interfaces\\services\\iassettypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\interfaces\\services\\iassettypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.api\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FBC95BE-EC22-4C51-A825-3870F51DA72C}|MISA.QLTS.Api\\MISA.QLTS.Api.csproj|solutionrelative:misa.qlts.api\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|e:\\misa\\misa final project\\misa.qlts\\misa.qlts.core\\mappers\\departmentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B8AACC0-766C-4D98-8536-71C5391294A2}|MISA.QLTS.Core\\MISA.QLTS.Core.csproj|solutionrelative:misa.qlts.core\\mappers\\departmentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -98,292 +126,384 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DepartmentRepository.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\DepartmentRepository.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Infrastructure\\Repositories\\DepartmentRepository.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\DepartmentRepository.cs",
-              "RelativeToolTip": "MISA.QLTS.Infrastructure\\Repositories\\DepartmentRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T13:04:41.13Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AssetTypeService.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\AssetTypeService.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Services\\AssetTypeService.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\AssetTypeService.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Services\\AssetTypeService.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAvwBUAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T12:51:05.402Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AssetTypeRepository.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\AssetTypeRepository.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Infrastructure\\Repositories\\AssetTypeRepository.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\AssetTypeRepository.cs",
-              "RelativeToolTip": "MISA.QLTS.Infrastructure\\Repositories\\AssetTypeRepository.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAUwCkAAAA1AAAAAAAAAA==",
+              "Title": "AssetService.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\AssetService.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Services\\AssetService.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\AssetService.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Services\\AssetService.cs",
+              "ViewState": "AgIAALwAAAAAAAAAAAAswPYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T11:49:55.815Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\appsettings.json",
-              "RelativeDocumentMoniker": "MISA.QLTS.Api\\appsettings.json",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\appsettings.json",
-              "RelativeToolTip": "MISA.QLTS.Api\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-05T10:38:14.427Z",
+              "WhenOpened": "2025-12-06T03:14:09.316Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "AssetType.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Entities\\AssetType.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Entities\\AssetType.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Entities\\AssetType.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Entities\\AssetType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA4AAAAnAAAAAAAAAA==",
+              "Title": "AssetResponseDto.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\AssetResponseDto.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\AssetResponseDto.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\AssetResponseDto.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\AssetResponseDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T11:38:04.192Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AssetTypeDto.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\AssetTypeDto.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\AssetTypeDto.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\AssetTypeDto.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\AssetTypeDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T11:43:59.787Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DepartmentMapper.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Mappers\\DepartmentMapper.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Mappers\\DepartmentMapper.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Mappers\\DepartmentMapper.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Mappers\\DepartmentMapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T09:48:48.938Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AssetTypeMapper.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Mappers\\AssetTypeMapper.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Mappers\\AssetTypeMapper.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Mappers\\AssetTypeMapper.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Mappers\\AssetTypeMapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T11:44:37.368Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "DepartmentService.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\DepartmentService.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Services\\DepartmentService.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\DepartmentService.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Services\\DepartmentService.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACEAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T09:12:55.409Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Program.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Api\\Program.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Program.cs",
-              "RelativeToolTip": "MISA.QLTS.Api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAiwBUAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T10:28:15.217Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IAssetTypeRepository.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetTypeRepository.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetTypeRepository.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetTypeRepository.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetTypeRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T11:47:08.986Z",
+              "WhenOpened": "2025-12-06T02:33:03.824Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "AssetTypesController.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\AssetTypesController.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Api\\Controllers\\AssetTypesController.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\AssetTypesController.cs",
-              "RelativeToolTip": "MISA.QLTS.Api\\Controllers\\AssetTypesController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwB0AAAALAAAAAAAAAA==",
+              "Title": "CloneAssetDto.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\CloneAssetDto.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\CloneAssetDto.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\CloneAssetDto.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\CloneAssetDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T12:19:29.77Z",
+              "WhenOpened": "2025-12-06T06:59:40.302Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "DatabaseContext.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Data\\DatabaseContext.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Infrastructure\\Data\\DatabaseContext.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Data\\DatabaseContext.cs",
-              "RelativeToolTip": "MISA.QLTS.Infrastructure\\Data\\DatabaseContext.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAvwBQAAAAzAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "UpdateAssetDto.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\UpdateAssetDto.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\UpdateAssetDto.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\UpdateAssetDto.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\UpdateAssetDto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwBoAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T09:21:28.005Z",
+              "WhenOpened": "2025-12-06T06:36:21.145Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 4,
+              "Title": "IAssetRepository.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetRepository.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetRepository.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetRepository.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAWwBQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T02:52:24.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AssetRepository.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\AssetRepository.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Infrastructure\\Repositories\\AssetRepository.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\AssetRepository.cs",
+              "RelativeToolTip": "MISA.QLTS.Infrastructure\\Repositories\\AssetRepository.cs",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAowMoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T02:55:55.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IAssetService.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Services\\IAssetService.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Interfaces\\Services\\IAssetService.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Services\\IAssetService.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Interfaces\\Services\\IAssetService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAewBEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T03:12:05.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AssetMapper.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Mappers\\AssetMapper.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Mappers\\AssetMapper.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Mappers\\AssetMapper.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Mappers\\AssetMapper.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAowDQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T02:44:45.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DeleteAssetDto.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\DeleteAssetDto.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\DeleteAssetDto.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\DeleteAssetDto.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\DeleteAssetDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T06:39:32.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "DepartmentDto.cs",
               "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\DepartmentDto.cs",
               "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\DepartmentDto.cs",
               "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\DepartmentDto.cs",
               "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\DepartmentDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T12:15:29.302Z",
+              "WhenOpened": "2025-12-06T03:19:27.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CreateAssetDto.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\CreateAssetDto.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\CreateAssetDto.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\CreateAssetDto.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\CreateAssetDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T02:27:26.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PaginationRequest.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\Common\\PaginationRequest.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\Common\\PaginationRequest.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\Common\\PaginationRequest.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\Common\\PaginationRequest.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB8AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T04:57:44.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PaginatedResult.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\Common\\PaginatedResult.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\Common\\PaginatedResult.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\Common\\PaginatedResult.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\Common\\PaginatedResult.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwBMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T04:58:22.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Program.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Api\\Program.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Program.cs",
+              "RelativeToolTip": "MISA.QLTS.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T04:12:19.375Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 14,
-              "Title": "IDepartmentService.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Services\\IDepartmentService.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Interfaces\\Services\\IDepartmentService.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Services\\IDepartmentService.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Interfaces\\Services\\IDepartmentService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA0AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T09:10:57.021Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "IDepartmentRepository.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IDepartmentRepository.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Interfaces\\Repositories\\IDepartmentRepository.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IDepartmentRepository.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Interfaces\\Repositories\\IDepartmentRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T09:19:35.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ApiResponse.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\Common\\ApiResponse.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\Common\\ApiResponse.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\Common\\ApiResponse.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\Common\\ApiResponse.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAADwv1AAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T11:22:08.914Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Department.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Entities\\Department.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Entities\\Department.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Entities\\Department.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Entities\\Department.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T09:07:55.49Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
               "Title": "BaseApiController.cs",
               "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\BaseApiController.cs",
               "RelativeDocumentMoniker": "MISA.QLTS.Api\\Controllers\\BaseApiController.cs",
               "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\BaseApiController.cs",
               "RelativeToolTip": "MISA.QLTS.Api\\Controllers\\BaseApiController.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAIwEYAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T11:23:29.679Z",
+              "WhenOpened": "2025-12-06T03:57:50.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AssetsController.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\AssetsController.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Api\\Controllers\\AssetsController.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\AssetsController.cs",
+              "RelativeToolTip": "MISA.QLTS.Api\\Controllers\\AssetsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMQAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T03:56:45.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AssetTypeService.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\AssetTypeService.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Services\\AssetTypeService.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\AssetTypeService.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Services\\AssetTypeService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBkAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T03:23:48.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AssetTypesController.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\AssetTypesController.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Api\\Controllers\\AssetTypesController.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\AssetTypesController.cs",
+              "RelativeToolTip": "MISA.QLTS.Api\\Controllers\\AssetTypesController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwCoAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T03:24:18.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DepartmentService.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\DepartmentService.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Services\\DepartmentService.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Services\\DepartmentService.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Services\\DepartmentService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBsAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T03:21:07.478Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 19,
-              "Title": "MISA.QLTS.Api",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\MISA.QLTS.Api.csproj",
-              "RelativeDocumentMoniker": "MISA.QLTS.Api\\MISA.QLTS.Api.csproj",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\MISA.QLTS.Api.csproj",
-              "RelativeToolTip": "MISA.QLTS.Api\\MISA.QLTS.Api.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-12-05T10:45:23.272Z",
+              "Title": "IDepartmentRepository.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IDepartmentRepository.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Interfaces\\Repositories\\IDepartmentRepository.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IDepartmentRepository.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Interfaces\\Repositories\\IDepartmentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA0AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T03:19:05.499Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Class1.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Infrastructure\\Class1.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Class1.cs",
-              "RelativeToolTip": "MISA.QLTS.Infrastructure\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Title": "IAssetTypeRepository.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetTypeRepository.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetTypeRepository.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetTypeRepository.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Interfaces\\Repositories\\IAssetTypeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T08:11:36.542Z",
+              "WhenOpened": "2025-12-06T03:22:52.73Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 21,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Class1.cs",
-              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Class1.cs",
-              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Class1.cs",
-              "RelativeToolTip": "MISA.QLTS.Core\\Class1.cs",
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\Common\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Dtos\\Common\\ApiResponse.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Dtos\\Common\\ApiResponse.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Dtos\\Common\\ApiResponse.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T04:57:26.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Asset.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Entities\\Asset.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Entities\\Asset.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Entities\\Asset.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Entities\\Asset.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAiwA4AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T02:23:04.06Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AssetTypeRepository.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\AssetTypeRepository.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Infrastructure\\Repositories\\AssetTypeRepository.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\AssetTypeRepository.cs",
+              "RelativeToolTip": "MISA.QLTS.Infrastructure\\Repositories\\AssetTypeRepository.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwCsAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T02:56:53.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "DepartmentRepository.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\DepartmentRepository.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Infrastructure\\Repositories\\DepartmentRepository.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Infrastructure\\Repositories\\DepartmentRepository.cs",
+              "RelativeToolTip": "MISA.QLTS.Infrastructure\\Repositories\\DepartmentRepository.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACoAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T02:56:57.567Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IDepartmentService.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Services\\IDepartmentService.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Interfaces\\Services\\IDepartmentService.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Services\\IDepartmentService.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Interfaces\\Services\\IDepartmentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T03:21:12.978Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "IAssetTypeService.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Services\\IAssetTypeService.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Interfaces\\Services\\IAssetTypeService.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Interfaces\\Services\\IAssetTypeService.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Interfaces\\Services\\IAssetTypeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T03:23:37.198Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DepartmentsController.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\DepartmentsController.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Api\\Controllers\\DepartmentsController.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Api\\Controllers\\DepartmentsController.cs",
+              "RelativeToolTip": "MISA.QLTS.Api\\Controllers\\DepartmentsController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwC8AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T03:21:52.378Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "DepartmentMapper.cs",
+              "DocumentMoniker": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Mappers\\DepartmentMapper.cs",
+              "RelativeDocumentMoniker": "MISA.QLTS.Core\\Mappers\\DepartmentMapper.cs",
+              "ToolTip": "E:\\MISA\\MISA FINAL PROJECT\\MISA.QLTS\\MISA.QLTS.Core\\Mappers\\DepartmentMapper.cs",
+              "RelativeToolTip": "MISA.QLTS.Core\\Mappers\\DepartmentMapper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T08:10:16.666Z",
+              "WhenOpened": "2025-12-06T03:19:21.84Z",
               "EditorCaption": ""
             }
           ]
