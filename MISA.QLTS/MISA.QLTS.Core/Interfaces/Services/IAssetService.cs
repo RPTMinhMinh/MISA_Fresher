@@ -17,5 +17,7 @@ namespace MISA.QLTS.Core.Interfaces.Services
         Task<AssetResponseDto> UpdateAssetAsync(string assetCode, UpdateAssetDto updateAssetDto);
         Task<int> DeleteAssetsAsync(List<string> assetCodes);
         Task<string> GetNextAssetCodeAsync();
+        Task<AssetStatisticsDto> GetAssetStatisticsAsync(AssetStatisticsRequest request);
+
     }
 }

@@ -99,6 +99,30 @@ export class AssetService extends ApiService {
     }
   }
 
+  // Lấy ra thống kê
+  async getAssetStatistics(params = {}) {
+    try {
+      // Tạo query params
+      const queryParams = {
+        SearchKeyword: params.searchKeyword || params.SearchKeyword || '',
+        DepartmentCode: params.departmentCode || params.DepartmentCode || '',
+        AssetTypeCode: params.assetTypeCode || params.AssetTypeCode || '',
+      }
+
+      // Xóa các param rỗng để không gửi lên server
+      Object.keys(queryParams).forEach((key) => {
+        if (queryParams[key] === '' || queryParams[key] === undefined) {
+          delete queryParams[key]
+        }
+      })
+
+      const response = await this.get(`${this.endpoint}/statistics`, queryParams)
+      return this.handleResponse(response)
+    } catch (error) {
+      return this.handleError(error)
+    }
+  }
+
   // Phương thức helper tạo pagination params
   createPaginationParams(page = 1, pageSize = 10, filters = {}) {
     return {

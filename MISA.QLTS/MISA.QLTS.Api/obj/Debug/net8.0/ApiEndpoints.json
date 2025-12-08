@@ -306,6 +306,47 @@
     ]
   },
   {
+    "ContainingType": "MISA.QLTS.Api.Controllers.AssetsController",
+    "Method": "GetAssetStatistics",
+    "RelativePath": "api/v1/Assets/statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "SearchKeyword",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DepartmentCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AssetTypeCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MISA.QLTS.Core.Dtos.Common.ApiResponse\u00601[[MISA.QLTS.Core.Dtos.AssetStatisticsDto, MISA.QLTS.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "MISA.QLTS.Core.Dtos.Common.ApiResponse\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
     "ContainingType": "MISA.QLTS.Api.Controllers.AssetTypesController",
     "Method": "GetAll",
     "RelativePath": "api/v1/AssetTypes",

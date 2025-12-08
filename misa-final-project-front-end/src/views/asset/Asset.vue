@@ -39,8 +39,8 @@
 
             <div class="main-content bg-white rounded-lg shadow-sm border border-gray-200 flex-1 overflow-hidden">
                 <AssetTable :dataSource="assets" :loading="loading || dropdownLoading" :pagination="pagination"
-                    @selection-change="handleSelectionChange" @row-click="handleRowClick" @edit="handleEdit"
-                    @copy="handleCopy" @delete="handleDelete" @page-change="handlePageChange"
+                    :statistics="statistics" @selection-change="handleSelectionChange" @row-click="handleRowClick"
+                    @edit="handleEdit" @copy="handleCopy" @delete="handleDelete" @page-change="handlePageChange"
                     @page-size-change="handlePageSizeChange" />
             </div>
 
@@ -49,14 +49,14 @@
                 @save="handleSaveAsset" />
 
             <!-- Popup xác nhận xóa -->
-            <MsConfirmDialog :visible="showDeleteConfirm" @update:visible="showDeleteConfirm = $event" title="Xác nhận xóa"
+            <MsConfirmDialog :visible="showDeleteConfirm" @update:visible="showDeleteConfirm = $event"
                 :message="deleteConfirmMessage" cancel-text="Hủy" confirm-text="Xóa" @confirm="confirmDelete"
                 @cancel="cancelDelete" />
 
             <!-- Popup xác nhận hủy form -->
             <MsConfirmDialog :visible="showCancelFormConfirm" @update:visible="showCancelFormConfirm = $event"
-                title="Xác nhận hủy" message="Bạn muốn hủy bỏ tài sản ?" cancel-text="Không" confirm-text="Hủy bỏ"
-                @confirm="confirmCancelForm" @cancel="cancelCancelForm" />
+                :message="popupMode === 'edit' ? 'Bạn muốn hủy bỏ sửa tài sản' : 'Bạn muốn hủy thêm tài sản'"
+                cancel-text="Không" confirm-text="Hủy bỏ" @confirm="confirmCancelForm" @cancel="cancelCancelForm" />
 
         </div>
     </main>
@@ -99,6 +99,7 @@ const {
     loading,
     pagination,
     filters,
+    statistics,
     fetchAssets,
     setFilter,
     changePage,
@@ -122,11 +123,11 @@ const departmentFilterValue = () => {
 // Computed message cho popup xác nhận xóa
 const deleteConfirmMessage = computed(() => {
     if (deleteType.value === 'single' && assetToDelete.value) {
-        return `Bạn có chắc chắn muốn xóa tài sản "${assetToDelete.value.assetName}"?`;
+        return `Bạn có chắc chắn muốn xóa tài sản "${assetToDelete.value.assetName}"`;
     } else if (deleteType.value === 'multiple') {
-        return `Bạn có chắc chắn muốn xóa ${selectedRowKeys.value.length} tài sản đã chọn?`;
+        return `Bạn chắc chắn muốn xóa ${selectedRowKeys.value.length} tài sản đã chọn`;
     }
-    return 'Bạn có chắc chắn muốn xóa?';
+    return 'Bạn có chắc chắn muốn xóa';
 });
 
 // Hàm load dữ liệu
@@ -266,16 +267,8 @@ const handleEdit = (record) => {
 
 // Đóng popup
 const closePopup = () => {
-    if (popupMode.value === 'edit' || (popupMode.value === 'add' && hasFormData())) {
-        showCancelFormConfirm.value = true;
-    } else {
-        doClosePopup();
-    }
-};
-
-// Kiểm tra form có dữ liệu không
-const hasFormData = () => {
-    return false;
+    // Luôn hiển thị popup xác nhận hủy cho cả ADD và EDIT
+    showCancelFormConfirm.value = true;
 };
 
 // Xác nhận hủy form

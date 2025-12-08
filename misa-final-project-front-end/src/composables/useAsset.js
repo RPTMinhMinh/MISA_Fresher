@@ -1,4 +1,3 @@
-// src/composables/useAsset.js
 import { ref } from 'vue'
 import { assetService } from '@/services'
 
@@ -6,6 +5,12 @@ export function useAsset() {
   const loading = ref(false)
   const error = ref(null)
   const assets = ref([])
+  const statistics = ref({
+    totalQuantity: 0,
+    totalOriginalPrice: 0,
+    totalAnnualDecreciation: 0,
+    totalRemainingValue: 0
+  })
   
   const filters = ref({
     searchKeyword: '',
@@ -37,14 +42,22 @@ export function useAsset() {
         ...customParams
       }
 
-      // Gọi API
-      const response = await assetService.getAssetsPaged(params)
-      console.log('API Response:', response) // Log để debug
+      // Gọi API song song: lấy danh sách và thống kê
+      const [assetsResponse, statsResponse] = await Promise.all([
+        assetService.getAssetsPaged(params),
+        assetService.getAssetStatistics({
+          SearchKeyword: filters.value.searchKeyword,
+          DepartmentCode: filters.value.departmentCode,
+          AssetTypeCode: filters.value.assetTypeCode,
+        })
+      ]);
 
-      // ĐIỀU CHỈNH: Response từ API có cấu trúc { success, message, data, ... }
-      // data chứa: { pageNumber, pageSize, totalPages, totalRecords, hasPrevious, hasNext, data: [...] }
-      if (response && response.success && response.data) {
-        const apiData = response.data
+      console.log('API Response:', assetsResponse)
+      console.log('Statistics API Response:', statsResponse)
+
+      // Xử lý dữ liệu tài sản
+      if (assetsResponse && assetsResponse.success && assetsResponse.data) {
+        const apiData = assetsResponse.data
         
         // Map dữ liệu từ API sang format cho table
         assets.value = apiData.data.map((item) => ({
@@ -78,14 +91,52 @@ export function useAsset() {
         }
       } else {
         assets.value = []
-        console.warn('No data returned from API or API returned error:', response)
+        console.warn('No data returned from API or API returned error:', assetsResponse)
+      }
+
+      // Xử lý thống kê
+      if (statsResponse && statsResponse.success && statsResponse.data) {
+        statistics.value = statsResponse.data
+      } else {
+        // Reset thống kê nếu có lỗi
+        statistics.value = {
+          totalQuantity: 0,
+          totalOriginalPrice: 0,
+          totalAnnualDecreciation: 0,
+          totalRemainingValue: 0
+        }
       }
     } catch (err) {
       error.value = err.message || err.response?.message || 'Có lỗi xảy ra khi tải dữ liệu'
       console.error('Error fetching assets:', err)
       assets.value = []
+      statistics.value = {
+        totalQuantity: 0,
+        totalOriginalPrice: 0,
+        totalAnnualDecreciation: 0,
+        totalRemainingValue: 0
+      }
     } finally {
       loading.value = false
+    }
+  }
+
+  // Hàm lấy thống kê riêng (nếu cần)
+  const fetchStatistics = async (customParams = {}) => {
+    try {
+      const params = {
+        SearchKeyword: filters.value.searchKeyword,
+        DepartmentCode: filters.value.departmentCode,
+        AssetTypeCode: filters.value.assetTypeCode,
+        ...customParams
+      }
+
+      const response = await assetService.getAssetStatistics(params)
+      if (response && response.success && response.data) {
+        statistics.value = response.data
+      }
+    } catch (err) {
+      console.error('Error fetching statistics:', err)
     }
   }
 
@@ -131,11 +182,13 @@ export function useAsset() {
     loading,
     error,
     assets,
+    statistics,
     pagination,
     filters: currentFilters(),
 
     // Methods
     fetchAssets,
+    fetchStatistics,
     setFilter,
     resetFilters,
     changePage,

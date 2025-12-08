@@ -435,6 +435,58 @@
         }
       }
     },
+    "/api/v1/Assets/statistics": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "parameters": [
+          {
+            "name": "SearchKeyword",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DepartmentCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AssetTypeCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetStatisticsDtoApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/AssetTypes": {
       "get": {
         "tags": [
@@ -819,6 +871,59 @@
           },
           "data": {
             "$ref": "#/components/schemas/AssetResponseDtoPaginatedResult"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetStatisticsDto": {
+        "type": "object",
+        "properties": {
+          "totalQuantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalOriginalPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalAnnualDecreciation": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalRemainingValue": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetStatisticsDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AssetStatisticsDto"
           },
           "errors": {
             "type": "array",

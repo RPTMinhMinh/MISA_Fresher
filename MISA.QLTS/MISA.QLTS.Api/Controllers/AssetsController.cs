@@ -225,5 +225,24 @@ namespace MISA.QLTS.Api.Controllers
                     new List<string> { ex.Message });
             }
         }
+
+        [HttpGet("statistics")]
+        [ProducesResponseType(typeof(ApiResponse<AssetStatisticsDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAssetStatistics([FromQuery] AssetStatisticsRequest request)
+        {
+            try
+            {
+                var statistics = await _assetService.GetAssetStatisticsAsync(request);
+                return OkResult(statistics, "Lấy thống kê tài sản thành công");
+            }
+            catch (Exception ex)
+            {
+                // Log error here
+                return InternalServerErrorResult<AssetStatisticsDto>(
+                    "Đã xảy ra lỗi khi lấy thống kê tài sản",
+                    new List<string> { ex.Message });
+            }
+        }
     }
 }

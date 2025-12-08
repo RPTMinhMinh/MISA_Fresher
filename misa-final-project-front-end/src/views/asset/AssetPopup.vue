@@ -100,10 +100,6 @@
                 <MsButton variant="outline" @click="handleCancelClick" class="px-6">Hủy</MsButton>
                 <MsButton variant="main" @click="save" class="px-6" :loading="saving">Lưu</MsButton>
             </div>
-
-            <MsConfirmDialog :visible="showCancelConfirm" @update:visible="showCancelConfirm = $event" title="Xác nhận hủy"
-                message="Bạn muốn hủy bỏ tài sản ?" cancel-text="Không" confirm-text="Hủy bỏ" @confirm="confirmCancel"
-                @cancel="cancelCancel" />
         </div>
     </div>
 
@@ -150,7 +146,6 @@ const saving = ref(false);
 const fieldErrors = reactive({});
 const purchaseDateValue = ref(dayjs());
 const startDateValue = ref(dayjs());
-const showCancelConfirm = ref(false);
 const required = ref(true);
 
 // Format date thành dd/MM/yyyy
@@ -344,18 +339,7 @@ const validateForm = () => {
 
 // Xử lý click nút hủy
 const handleCancelClick = () => {
-    showCancelConfirm.value = true;
-};
-
-// Xác nhận hủy
-const confirmCancel = () => {
     emit('close');
-    showCancelConfirm.value = false;
-};
-
-// Hủy bỏ việc hủy
-const cancelCancel = () => {
-    showCancelConfirm.value = false;
 };
 
 // Lưu tài sản

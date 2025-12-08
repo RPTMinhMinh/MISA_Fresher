@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using MISA.QLTS.Core.Dtos;
 using MISA.QLTS.Core.Dtos.Common;
 using MISA.QLTS.Core.Entities;
 using MISA.QLTS.Core.Interfaces.Repositories;
@@ -234,6 +235,43 @@ namespace MISA.QLTS.Infrastructure.Repositories
             await connection.ExecuteAsync(sql, new { AssetCode = assetCode });
         }
 
+        public async Task<AssetStatisticsDto> GetAssetStatisticsAsync(string? searchKeyword = null, string? departmentCode = null, string? assetTypeCode = null)
+        {
+            using var connection = _connectionString.CreateConnection();
 
+            var sql = @"
+                select 
+                    coalesce(sum(a.quantity), 0) as TotalQuantity,
+                    coalesce(sum(a.original_price), 0) as TotalOriginalPrice,
+                    coalesce(sum(a.annual_decreciation), 0) as TotalAnnualDecreciation,
+                    coalesce(sum(a.original_price - a.annual_decreciation), 0) as TotalRemainingValue
+                from asset a
+                left join department d on a.department_id = d.department_id
+                left join asset_type at on a.asset_type_id = at.asset_type_id
+                where 1=1";
+
+            var parameters = new DynamicParameters();
+
+            if (!string.IsNullOrWhiteSpace(searchKeyword))
+            {
+                sql += " and (a.asset_code like @Keyword or a.asset_name like @Keyword)";
+                parameters.Add("Keyword", $"%{searchKeyword}%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(departmentCode))
+            {
+                sql += " and d.department_code = @DepartmentCode";
+                parameters.Add("DepartmentCode", departmentCode);
+            }
+
+            if (!string.IsNullOrWhiteSpace(assetTypeCode))
+            {
+                sql += " and at.asset_type_code = @AssetTypeCode";
+                parameters.Add("AssetTypeCode", assetTypeCode);
+            }
+
+            return await connection.QueryFirstOrDefaultAsync<AssetStatisticsDto>(sql, parameters)
+                   ?? new AssetStatisticsDto();
+        }
     }
 }

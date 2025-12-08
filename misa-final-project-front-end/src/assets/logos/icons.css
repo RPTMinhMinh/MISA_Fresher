@@ -180,7 +180,32 @@
 }
 
 .icon-copy-dark{
-  background: url('../images/qlts-icon.png') no-repeat -419px -111px;
-	width: 18px;
-	height: 18px;
+  background: url('../images/qlts-icon.png') no-repeat -244px -112px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon-next,
+.icon-previous {
+  display: inline-block;
+  background-image: url('../images/qlts-icon.png');
+  background-repeat: no-repeat;
+}
+
+.icon-next {
+  background-position: -73px -246px;
+  width: 7px;
+  height: 12px;
+}
+
+.icon-previous {
+  background-position: -29px -246px;
+  width: 7px;
+  height: 12px;
+}
+
+.icon-warning{
+  background: url('../images/qlts-icon.png') no-repeat -416px -66px;
+	width: 24px;
+	height: 20px;
 }
