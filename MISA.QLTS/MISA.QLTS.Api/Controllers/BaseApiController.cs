@@ -5,7 +5,7 @@ using MISA.QLTS.Core.Dtos.Common;
 namespace MISA.QLTS.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [Produces("application/json")]
     public class BaseApiController : ControllerBase
     {

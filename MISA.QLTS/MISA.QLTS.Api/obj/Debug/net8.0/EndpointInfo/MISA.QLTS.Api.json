@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Assets": {
+    "/api/v1/Assets": {
       "post": {
         "tags": [
           "Assets"
@@ -222,7 +222,7 @@
         }
       }
     },
-    "/api/Assets/{assetCode}": {
+    "/api/v1/Assets/{assetCode}": {
       "get": {
         "tags": [
           "Assets"
@@ -357,7 +357,7 @@
         }
       }
     },
-    "/api/Assets/{assetCode}/clone": {
+    "/api/v1/Assets/{assetCode}/clone": {
       "get": {
         "tags": [
           "Assets"
@@ -406,7 +406,7 @@
         }
       }
     },
-    "/api/Assets/next-code": {
+    "/api/v1/Assets/next-code": {
       "get": {
         "tags": [
           "Assets"

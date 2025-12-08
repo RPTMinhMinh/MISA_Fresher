@@ -2,7 +2,7 @@
   {
     "ContainingType": "MISA.QLTS.Api.Controllers.AssetsController",
     "Method": "CreateAsset",
-    "RelativePath": "api/Assets",
+    "RelativePath": "api/v1/Assets",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -47,7 +47,7 @@
   {
     "ContainingType": "MISA.QLTS.Api.Controllers.AssetsController",
     "Method": "GetAssetsPaged",
-    "RelativePath": "api/Assets",
+    "RelativePath": "api/v1/Assets",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -112,7 +112,7 @@
   {
     "ContainingType": "MISA.QLTS.Api.Controllers.AssetsController",
     "Method": "DeleteAssets",
-    "RelativePath": "api/Assets",
+    "RelativePath": "api/v1/Assets",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -150,7 +150,7 @@
   {
     "ContainingType": "MISA.QLTS.Api.Controllers.AssetsController",
     "Method": "GetAssetByCode",
-    "RelativePath": "api/Assets/{assetCode}",
+    "RelativePath": "api/v1/Assets/{assetCode}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -195,7 +195,7 @@
   {
     "ContainingType": "MISA.QLTS.Api.Controllers.AssetsController",
     "Method": "UpdateAsset",
-    "RelativePath": "api/Assets/{assetCode}",
+    "RelativePath": "api/v1/Assets/{assetCode}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -245,7 +245,7 @@
   {
     "ContainingType": "MISA.QLTS.Api.Controllers.AssetsController",
     "Method": "CloneAsset",
-    "RelativePath": "api/Assets/{assetCode}/clone",
+    "RelativePath": "api/v1/Assets/{assetCode}/clone",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -283,7 +283,7 @@
   {
     "ContainingType": "MISA.QLTS.Api.Controllers.AssetsController",
     "Method": "GetNextAssetCode",
-    "RelativePath": "api/Assets/next-code",
+    "RelativePath": "api/v1/Assets/next-code",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

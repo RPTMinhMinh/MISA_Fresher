@@ -6,8 +6,6 @@ using MISA.QLTS.Core.Interfaces.Services;
 
 namespace MISA.QLTS.Api.Controllers
 {
-    [Route("api/v1/[controller]")]
-    [ApiController]
     public class DepartmentsController : BaseApiController
     {
         private readonly IDepartmentService _departmentService;
