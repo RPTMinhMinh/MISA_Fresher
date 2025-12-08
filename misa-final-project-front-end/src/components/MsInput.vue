@@ -1,7 +1,9 @@
 <template>
     <div class="flex flex-col w-full gap-1">
-        <label v-if="label" class="text-[13px] font-medium text-gray-700 font-roboto" :class="{ 'opacity-50': disabled }">
+        <label v-if="label" class="text-[13px] font-medium text-gray-700 font-roboto flex items-center gap-1"
+            :class="{ 'opacity-50': disabled }">
             {{ label }}
+            <span v-if="required" class="text-[4px] text-[#ff4d4f] leading-none mt-[-2px]">*</span>
         </label>
 
         <a-input ref="inputRef" :value="modelValue" :disabled="disabled" :status="error ? 'error' : ''" v-bind="$attrs"
@@ -47,6 +49,11 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    // Trường bắt buộc (hiển thị dấu *)
+    required: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 // Định nghĩa Emits
@@ -61,12 +68,6 @@ const handleInput = (e) => {
 
 // Style classes động bằng Tailwind để override Ant Design
 const inputClasses = computed(() => {
-    // Base styles đã có ở template. 
-    // Ở đây xử lý các trạng thái đặc biệt nếu Tailwind utility class không đủ.
-
-    // Lưu ý: Ant Design đã xử lý status="error" và disabled tự động.
-    // Ta chỉ cần override màu sắc chủ đạo (Primary Color) cho giống thiết kế.
-
     if (props.error) {
         return 'hover:!border-[#ff4d4f] focus:!border-[#ff4d4f] focus:!shadow-none';
     }

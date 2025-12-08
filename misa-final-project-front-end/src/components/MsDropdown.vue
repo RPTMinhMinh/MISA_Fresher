@@ -1,7 +1,8 @@
 <template>
     <div class="flex flex-col w-full gap-1 ms-dropdown-wrapper">
-        <label v-if="label" class="text-[13px] font-medium text-gray-700 font-roboto" :class="{ 'opacity-50': disabled }">
+        <label v-if="label" class="text-[13px] font-medium text-gray-700 font-roboto flex items-center gap-1" :class="{ 'opacity-50': disabled }">
             {{ label }}
+            <span v-if="required" class="text-[6px] text-[#ff4d4f] leading-none mt-[-2px]">*</span>
         </label>
 
         <a-select :value="modelValue" :mode="mode" :options="standardOptions" :disabled="disabled"
@@ -89,6 +90,11 @@ const props = defineProps({
     iconPrefixClass: {
         type: String,
         default: '' // Mặc định không có icon
+    },
+    // Thêm prop required (bắt buộc)
+    required: {
+        type: Boolean,
+        default: false,
     }
 });
 
@@ -131,7 +137,7 @@ const isOptionSelected = (optionValue) => { // Loại bỏ type annotations
 }
 
 </script>
-  
+  
 <style scoped>
 /* Giữ nguyên Style đã override Ant Design */
 

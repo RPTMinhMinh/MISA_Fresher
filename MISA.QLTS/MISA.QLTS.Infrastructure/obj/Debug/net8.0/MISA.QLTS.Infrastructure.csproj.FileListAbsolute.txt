@@ -1,0 +1,16 @@
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\bin\Debug\net8.0\MISA.QLTS.Infrastructure.deps.json
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\bin\Debug\net8.0\MISA.QLTS.Infrastructure.dll
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\bin\Debug\net8.0\MISA.QLTS.Infrastructure.pdb
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\bin\Debug\net8.0\MISA.QLTS.Core.dll
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\bin\Debug\net8.0\MISA.QLTS.Core.pdb
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\MISA.QLTS.Infrastructure.csproj.AssemblyReference.cache
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\MISA.QLTS.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\MISA.QLTS.Infrastructure.AssemblyInfoInputs.cache
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\MISA.QLTS.Infrastructure.AssemblyInfo.cs
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\MISA.QLTS.Infrastructure.csproj.CoreCompileInputs.cache
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\MISA.QLTS.Infrastructure.sourcelink.json
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\MISA.QLT.4EC1F31C.Up2Date
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\MISA.QLTS.Infrastructure.dll
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\refint\MISA.QLTS.Infrastructure.dll
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\MISA.QLTS.Infrastructure.pdb
+E:\MISA\MISA FINAL PROJECT\MISA.QLTS\MISA.QLTS.Infrastructure\obj\Debug\net8.0\ref\MISA.QLTS.Infrastructure.dll
