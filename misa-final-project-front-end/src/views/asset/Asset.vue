@@ -1,37 +1,37 @@
 <template>
     <main class="content flex-1 min-h-0 bg-gray-100">
-        <div class="h-full flex flex-col p-4">
+        <div class="h-full flex flex-col p-2 md:p-3 lg:p-4">
 
-            <div class="header-content rounded-lg flex-shrink-0 mb-3">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="header-content rounded-lg flex-shrink-0 mb-2 md:mb-3">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3">
 
-                    <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                    <div class="flex flex-wrap items-center gap-2 md:gap-3 w-full md:w-auto">
                         <MsSearch v-model="searchText" placeholder="Tìm kiếm tài sản" iconSearchClass="icon-search"
-                            class="w-full md:w-[200px] flex-shrink-0" @search="handleSearch" />
+                            class="w-full md:w-[180px] lg:w-[200px] flex-shrink-0" @search="handleSearch" />
 
                         <MsDropdown v-model="assetTypeFilter" :options="assetTypeOptions" placeholder="Loại tài sản"
-                            iconPrefixClass="icon-filter" class="w-full md:w-[150px] flex-shrink-0"
+                            iconPrefixClass="icon-filter" class="w-full md:w-[140px] lg:w-[150px] flex-shrink-0"
                             @change="handleFilterChange" />
 
                         <MsDropdown v-model="departmentFilter" :options="departmentOptions" placeholder="Bộ phận sử dụng"
-                            iconPrefixClass="icon-filter" class="w-full md:w-[180px] flex-shrink-0"
+                            iconPrefixClass="icon-filter" class="w-full md:w-[160px] lg:w-[180px] flex-shrink-0"
                             @change="handleFilterChange" />
                     </div>
 
-                    <div class="flex items-center gap-2 flex-shrink-0 mt-3 md:mt-0 flex-nowrap">
-                        <MsButton variant="main" class="px-3 h-[40px] whitespace-nowrap" @click="openAddPopup">
-                            <span class="mr-2">+</span> Thêm tài sản
+                    <div class="flex items-center gap-1 md:gap-2 flex-shrink-0 mt-2 md:mt-0 flex-nowrap">
+                        <MsButton variant="main" class="px-2 md:px-3 h-[36px] md:h-[40px] whitespace-nowrap text-xs md:text-sm" @click="openAddPopup">
+                            <span class="mr-1 md:mr-2">+</span> Thêm tài sản
                         </MsButton>
 
                         <button type="button"
-                            class="ms-button-outline w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-md hover:bg-gray-50">
-                            <div class="icon-export"></div>
+                            class="ms-button-outline w-[36px] h-[36px] md:w-[40px] md:h-[40px] flex items-center justify-center border border-gray-300 rounded-md hover:bg-gray-50">
+                            <div class="icon-export w-4 h-4 md:w-5 md:h-5"></div>
                         </button>
 
                         <button type="button"
-                            class="ms-button-outline w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-md hover:bg-gray-50"
+                            class="ms-button-outline w-[36px] h-[36px] md:w-[40px] md:h-[40px] flex items-center justify-center border border-gray-300 rounded-md hover:bg-gray-50"
                             @click="handleBulkDelete" :disabled="selectedRowKeys.length === 0">
-                            <div class="icon-delete"></div>
+                            <div class="icon-delete w-4 h-4 md:w-5 md:h-5"></div>
                         </button>
                     </div>
                 </div>
@@ -387,20 +387,66 @@ onMounted(async () => {
     background-color: white;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .header-content>div {
+/* RESPONSIVE CHO 1366px */
+@media (max-width: 1366px) {
+    .header-content {
+        padding: 10px 12px;
+    }
+    
+    .header-content > div {
+        gap: 8px;
+    }
+}
+
+/* RESPONSIVE CHO TABLET */
+@media (max-width: 1024px) {
+    .header-content > div {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .header-content>div>div:first-child {
+    .header-content > div > div:first-child {
         width: 100%;
     }
 
-    .header-content>div>div:last-child {
+    .header-content > div > div:last-child {
         width: 100%;
         justify-content: flex-start;
+        margin-top: 8px;
+    }
+}
+
+/* RESPONSIVE CHO MOBILE */
+@media (max-width: 768px) {
+    .content {
+        padding: 8px !important;
+    }
+    
+    .header-content {
+        margin-bottom: 8px;
+        padding: 8px;
+    }
+    
+    .ms-button-outline,
+    .ms-button-outline:hover {
+        min-width: 32px;
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Tối ưu cho màn hình rất nhỏ */
+@media (max-width: 480px) {
+    .content {
+        padding: 4px !important;
+    }
+    
+    .header-content > div {
+        gap: 6px;
+    }
+    
+    .header-content > div > div:last-child {
+        flex-wrap: wrap;
     }
 }
 </style>

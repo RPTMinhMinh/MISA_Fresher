@@ -3,12 +3,16 @@
         <!-- Container chính cho bảng -->
         <div class="table-container flex-1 flex flex-col overflow-hidden">
             <!-- Wrapper để xử lý scroll ngang -->
-            <div class="table-scroll-wrapper overflow-x-auto flex-1 flex flex-col" ref="scrollWrapperRef" @scroll="handleContainerScroll">
+            <div class="table-scroll-wrapper overflow-x-auto flex-1 flex flex-col" 
+                 ref="scrollWrapperRef" 
+                 @scroll="handleContainerScroll">
+                
                 <!-- Header của bảng -->
-                <div class="table-header bg-gray-50 border-b border-gray-200 flex" ref="headerRef" :style="headerStyle">
+                <div class="table-header bg-gray-50 border-b border-gray-200 grid" 
+                     ref="headerRef">
                     <div v-for="column in processedColumns" :key="column.key"
-                        class="table-header-cell relative flex-shrink-0 border-r border-gray-200 last:border-r-0"
-                        :class="column.align === 'center' ? 'justify-center' : column.align === 'right' ? 'justify-end' : 'justify-start'"
+                        class="table-header-cell relative border-r border-gray-200 last:border-r-0"
+                        :class="getHeaderCellClasses(column)"
                         :style="getColumnStyle(column)">
                         <div class="header-content px-3 py-3 font-semibold text-gray-700 text-sm truncate select-none">
                             {{ column.title }}
@@ -17,30 +21,31 @@
                 </div>
 
                 <!-- Body của bảng -->
-                <div class="table-body flex-1 overflow-hidden" ref="bodyRef">
+                <div class="table-body flex-1 overflow-auto" ref="bodyRef">
                     <!-- Loading state -->
-                    <div v-if="loading" class="flex items-center justify-center h-full">
+                    <div v-if="loading" class="flex items-center justify-center h-full min-h-[300px] col-span-full">
                         <div class="text-gray-500">Đang tải...</div>
                     </div>
 
                     <!-- Empty state -->
-                    <div v-else-if="tableData.length === 0" class="flex items-center justify-center h-full">
+                    <div v-else-if="tableData.length === 0" class="flex items-center justify-center h-full min-h-[300px] col-span-full">
                         <div class="text-gray-500">Không có dữ liệu</div>
                     </div>
 
                     <!-- Data rows -->
-                    <div v-else>
-                        <div v-for="(record, index) in tableData" :key="record.key || index"
-                            class="table-row border-b border-gray-100 hover:bg-gray-50 flex" :class="{
-                                'bg-blue-50': selectedRowKeys.includes(record.key),
-                                'cursor-pointer': true
-                            }" @mouseenter="hoveredRowKey = record.key" @mouseleave="hoveredRowKey = null"
-                            @click="handleRowClick(record)" :style="rowStyle">
-
+                    <template v-else>
+                        <div v-for="(record, index) in tableData" :key="getRowKey(record, index)"
+                            class="table-row border-b border-gray-100 hover:bg-gray-50 grid" 
+                            :class="getRowClasses(record)"
+                            @mouseenter="hoveredRowKey = record.key" 
+                            @mouseleave="hoveredRowKey = null"
+                            @click="handleRowClick(record)">
+                            
                             <!-- Các cell trong hàng -->
-                            <div v-for="column in processedColumns" :key="column.key"
-                                class="table-cell flex-shrink-0 border-r border-gray-100 last:border-r-0 truncate"
-                                :class="getCellClasses(column)" :style="getColumnStyle(column)">
+                            <div v-for="column in processedColumns" :key="`${column.key}-${record.key}`"
+                                class="table-cell border-r border-gray-100 last:border-r-0"
+                                :class="getCellClasses(column)"
+                                :style="getColumnStyle(column)">
 
                                 <!-- Checkbox selection -->
                                 <div v-if="column.key === 'selection'" class="flex items-center justify-center h-full">
@@ -49,8 +54,8 @@
                                 </div>
 
                                 <!-- STT -->
-                                <div v-else-if="column.key === 'index'" class="flex items-center justify-center h-full">
-                                    {{ (pagination.pageNumber - 1) * pagination.pageSize + index + 1 }}
+                                <div v-else-if="column.key === 'index'" class="flex items-center justify-center h-full px-2 py-2">
+                                    {{ getRowIndex(index) }}
                                 </div>
 
                                 <!-- Action buttons -->
@@ -68,39 +73,39 @@
 
                                 <!-- Số lượng -->
                                 <div v-else-if="column.dataIndex === 'quantity'"
-                                    class="flex items-center justify-center h-full px-3 py-2">
-                                    {{ record[column.dataIndex] }}
+                                    class="flex items-center justify-center h-full px-2 py-2">
+                                    {{ formatNumber(record[column.dataIndex]) }}
                                 </div>
 
                                 <!-- Các cột số tiền -->
                                 <div v-else-if="['originalPrice', 'depreciation', 'remainingValue'].includes(column.dataIndex)"
-                                    class="flex items-center justify-end h-full px-3 py-2">
+                                    class="flex items-center justify-end h-full px-2 py-2">
                                     {{ formatCurrency(record[column.dataIndex]) }}
                                 </div>
 
                                 <!-- Các cột khác -->
-                                <div v-else class="flex items-center h-full px-3 py-2 truncate"
+                                <div v-else class="flex items-center h-full px-2 py-2 truncate"
                                     :title="getCellTooltip(record[column.dataIndex])">
                                     {{ record[column.dataIndex] || '-' }}
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </div>
 
         <!-- Footer với Pagination và Statistics -->
-        <div v-if="showPagination" class="table-footer bg-white border-t border-gray-200 py-3 px-4">
-            <div class="flex items-center justify-between">
+        <div v-if="showPagination" class="table-footer bg-white border-t border-gray-200 py-2 px-3">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                 <!-- Phần bên trái: Thông tin phân trang -->
-                <div class="flex items-center gap-10">
-                    <div class="pagination-info flex items-center text-gray-600 text-sm">
+                <div class="flex items-center flex-wrap gap-2 md:gap-4">
+                    <div class="pagination-info flex items-center text-gray-600 text-xs md:text-sm">
                         Tổng số: <strong class="mx-1">{{ totalRecords }}</strong> bản ghi
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <MsDropdown v-model="internalPageSize" :options="pageSizeOptions" class="w-20"
+                        <MsDropdown v-model="internalPageSize" :options="pageSizeOptions" class="w-16 md:w-20"
                             @change="handlePageSizeChange" :show-search="false" size="small" />
 
                         <div class="flex items-center gap-1">
@@ -109,15 +114,15 @@
                                 <div class="icon-previous"></div>
                             </button>
 
-                            <template v-for="(page, index) in displayedPages">
-                                <span v-if="page === '...'" :key="`ellipsis-${index}`" class="px-2 text-gray-400">
+                            <template v-for="(page, index) in displayedPages" :key="`page-${index}`">
+                                <span v-if="page === '...'" class="px-1 text-gray-400 text-xs">
                                     ...
                                 </span>
-                                <button v-else :key="`page-${page}`" @click="handlePageChange(page)" :class="[
+                                <button v-else @click="handlePageChange(page)" :class="[
                                     'pagination-btn',
                                     page === currentPage ? 'pagination-active' : ''
                                 ]">
-                                    {{ page }}
+                                    <span class="text-xs">{{ page }}</span>
                                 </button>
                             </template>
 
@@ -129,47 +134,19 @@
                     </div>
                 </div>
 
-                <!-- Phần bên phải: Statistics đơn giản -->
-                <div class="statistics-wrapper flex-1 ml-4 min-w-0">
-                    <div class="statistics-container flex overflow-x-auto">
-                        <!-- Cột selection (50px) -->
-                        
-                        <!-- Cột STT (60px) -->
-                        
-                        <!-- Các cột thông tin tài sản - để trống để giữ vị trí -->
-                        <div class="statistic-placeholder-cell" style="width: 150px; min-width: 140px;"></div> <!-- Loại tài sản -->
-                        <div class="statistic-placeholder-cell" style="width: 160px; min-width: 160px;"></div> <!-- Bộ phận sử dụng -->
-                        
-                        <!-- Số lượng -->
-                        <div class="statistic-cell flex-shrink-0 px-3 py-1" style="width: 90px; min-width: 90px;">
-                            <div class="statistic-value text-sm font-semibold text-gray-900 text-center rounded px-2 py-1">
-                                {{ formatNumber(statistics.totalQuantity) }}
+                <!-- Phần bên phải: Statistics -->
+                <div class="statistics-wrapper flex-1 mt-2 md:mt-0 md:ml-4 min-w-0">
+                    <div class="statistics-content flex items-center overflow-x-auto" ref="statisticsRef">
+                        <!-- Chỉ hiển thị các cột có thống kê -->
+                        <div v-for="column in statisticColumns" :key="`stat-${column.dataIndex}`"
+                            class="statistic-item flex-shrink-0 flex items-center px-1 md:px-2"
+                            :style="{ width: getStatisticWidth(column) }">
+                            
+                            <div class="statistic-value text-xs md:text-sm font-semibold text-gray-900 rounded px-1 md:px-2 py-1 bg-gray-100 whitespace-nowrap"
+                                :class="getStatisticValueClasses(column)">
+                                {{ getStatisticValue(column.dataIndex) }}
                             </div>
                         </div>
-                        
-                        <!-- Nguyên giá -->
-                        <div class="statistic-cell flex-shrink-0 px-3 py-1" style="width: 123px; min-width: 120px;">
-                            <div class="statistic-value text-sm font-semibold text-gray-900 text-right rounded px-2 py-1">
-                                {{ formatCurrency(statistics.totalOriginalPrice) }}
-                            </div>
-                        </div>
-                        
-                        <!-- HM/KH lũy kế -->
-                        <div class="statistic-cell flex-shrink-0 px-3 py-1" style="width: 140px; min-width: 130px;">
-                            <div class="statistic-value text-sm font-semibold text-gray-900 text-right rounded px-2 py-1">
-                                {{ formatCurrency(statistics.totalAnnualDecreciation) }}
-                            </div>
-                        </div>
-                        
-                        <!-- Giá trị còn lại -->
-                        <div class="statistic-cell flex-shrink-0 px-3 py-1" style="width: 113px; min-width: 100px;">
-                            <div class="statistic-value text-sm font-semibold text-gray-900 text-right rounded px-2 py-1">
-                                {{ formatCurrency(statistics.totalRemainingValue) }}
-                            </div>
-                        </div>
-                        
-                        <!-- Cột action (100px) -->
-                        <div class="statistic-placeholder-cell" style="width: 100px; min-width: 100px;"></div>
                     </div>
                 </div>
             </div>
@@ -178,7 +155,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, watch, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import MsCheckbox from '@/components/MsCheckbox.vue'
 import MsDropdown from '@/components/MsDropdown.vue'
 
@@ -216,6 +193,10 @@ const props = defineProps({
     showPagination: {
         type: Boolean,
         default: true
+    },
+    rowKey: {
+        type: [String, Function],
+        default: 'key'
     }
 })
 
@@ -225,10 +206,8 @@ const emit = defineEmits(['selection-change', 'row-click', 'edit', 'copy', 'page
 // State
 const selectedRowKeys = ref([])
 const hoveredRowKey = ref(null)
-const tableContainerRef = ref(null)
-const headerRef = ref(null)
-const bodyRef = ref(null)
 const scrollWrapperRef = ref(null)
+const statisticsRef = ref(null)
 const internalPageSize = ref(props.pagination.pageSize || 10)
 
 // Options cho dropdown số bản ghi/trang
@@ -254,99 +233,106 @@ const hasNext = computed(() => props.pagination.hasNext || false)
 const displayedPages = computed(() => {
     const current = currentPage.value
     const total = totalPages.value
-    const pages = []
-
+    
     if (total <= 5) {
-        for (let i = 1; i <= total; i++) {
-            pages.push(i)
-        }
-        return pages
+        return Array.from({ length: total }, (_, i) => i + 1)
     }
-
-    pages.push(1)
-
-    let startPage = Math.max(2, current - 1)
-    let endPage = Math.min(total - 1, current + 1)
-
-    if (startPage > 2) {
+    
+    const pages = [1]
+    
+    if (current > 3) {
         pages.push('...')
     }
-
-    for (let i = startPage; i <= endPage; i++) {
+    
+    const start = Math.max(2, current - 1)
+    const end = Math.min(total - 1, current + 1)
+    
+    for (let i = start; i <= end; i++) {
         pages.push(i)
     }
-
-    if (endPage < total - 1) {
+    
+    if (current < total - 2) {
         pages.push('...')
     }
-
+    
     if (total > 1) {
         pages.push(total)
     }
-
+    
     return pages
 })
 
-// Columns mặc định
+// Columns mặc định - Sử dụng đơn vị fr và minmax để linh hoạt
 const defaultColumns = [
-    { title: '', key: 'selection', dataIndex: 'selection', width: 50, align: 'center', fixed: 'left' },
-    { title: 'STT', key: 'index', width: 60, align: 'center', fixed: 'left' },
-    { title: 'Mã tài sản', dataIndex: 'assetCode', key: 'assetCode', minWidth: 140 },
-    { title: 'Tên tài sản', dataIndex: 'assetName', key: 'assetName', minWidth: 180 },
-    { title: 'Loại tài sản', dataIndex: 'assetType', key: 'assetType', minWidth: 140 },
-    { title: 'Bộ phận sử dụng', dataIndex: 'department', key: 'department', minWidth: 160 },
-    { title: 'Số lượng', dataIndex: 'quantity', key: 'quantity', width: 90, align: 'center' },
-    { title: 'Nguyên giá', dataIndex: 'originalPrice', key: 'originalPrice', width: 120, align: 'right' },
-    { title: 'HM/KH lũy kế', dataIndex: 'depreciation', key: 'depreciation', width: 130, align: 'right' },
-    { title: 'Giá trị còn lại', dataIndex: 'remainingValue', key: 'remainingValue', width: 130, align: 'right' },
-    { title: 'Chức năng', key: 'action', width: 100, align: 'center', fixed: 'right' }
+    { title: '', key: 'selection', dataIndex: 'selection', width: '40px', align: 'center', fixed: 'left' },
+    { title: 'STT', key: 'index', width: '50px', align: 'center', fixed: 'left' },
+    { title: 'Mã tài sản', dataIndex: 'assetCode', key: 'assetCode', width: 'minmax(100px, 1fr)', minWidth: '100px' },
+    { title: 'Tên tài sản', dataIndex: 'assetName', key: 'assetName', width: 'minmax(120px, 2fr)', minWidth: '120px' },
+    { title: 'Loại tài sản', dataIndex: 'assetType', key: 'assetType', width: 'minmax(100px, 1fr)', minWidth: '100px' },
+    { title: 'Bộ phận sử dụng', dataIndex: 'department', key: 'department', width: 'minmax(120px, 1.5fr)', minWidth: '120px' },
+    { title: 'Số lượng', dataIndex: 'quantity', key: 'quantity', width: 'minmax(70px, 0.7fr)', align: 'center' },
+    { title: 'Nguyên giá', dataIndex: 'originalPrice', key: 'originalPrice', width: 'minmax(100px, 1fr)', align: 'right' },
+    { title: 'HM/KH lũy kế', dataIndex: 'depreciation', key: 'depreciation', width: 'minmax(100px, 1fr)', align: 'right' },
+    { title: 'Giá trị còn lại', dataIndex: 'remainingValue', key: 'remainingValue', width: 'minmax(100px, 1fr)', align: 'right' },
+    { title: 'Chức năng', key: 'action', width: '80px', align: 'center', fixed: 'right' }
 ]
 
 // Xử lý columns
 const processedColumns = computed(() => {
     const cols = props.columns && props.columns.length > 0 ? props.columns : defaultColumns
-    return cols.map((col) => {
-        return {
-            ...col,
-            width: col.width || col.minWidth || 100
-        }
-    })
+    return cols.map((col) => ({
+        ...col,
+        width: col.width || col.minWidth || 'minmax(80px, 1fr)',
+        minWidth: col.minWidth || (typeof col.width === 'string' ? col.width.replace(/minmax\(|\)/g, '').split(',')[0] : '80px')
+    }))
 })
 
-// Tính tổng chiều rộng của tất cả các cột
-const totalWidth = computed(() => {
-    return processedColumns.value.reduce((total, col) => {
-        const width = col.width || col.minWidth || 100
-        return total + (typeof width === 'number' ? width : parseInt(width, 10))
-    }, 0)
-})
-
-// Style cho header và row
-const headerStyle = computed(() => {
-    return {
-        width: `${Math.max(totalWidth.value, 100)}px`,
-        minWidth: `${Math.max(totalWidth.value, 100)}px`
-    }
-})
-
-const rowStyle = computed(() => {
-    return headerStyle.value
+// Chỉ lấy các columns cần hiển thị thống kê
+const statisticColumns = computed(() => {
+    return processedColumns.value.filter(col => 
+        ['quantity', 'originalPrice', 'depreciation', 'remainingValue'].includes(col.dataIndex)
+    )
 })
 
 // Lấy style cho mỗi column
 const getColumnStyle = (col) => {
-    const width = col.width || col.minWidth || 100
     return {
-        width: `${width}px`,
-        minWidth: `${width}px`,
-        maxWidth: `${width}px`
+        width: col.width,
+        minWidth: col.minWidth,
+        maxWidth: col.fixed ? col.width : 'none'
     }
 }
 
-// Lấy classes cho cell dựa trên column
-const getCellClasses = (column) => {
-    const classes = []
+// Lấy width cho statistic (nhỏ hơn column width)
+const getStatisticWidth = (column) => {
+    const width = column.width
+    // Nếu là minmax, lấy giá trị min
+    if (typeof width === 'string' && width.includes('minmax')) {
+        const match = width.match(/minmax\(([^,]+),/)
+        if (match) {
+            return match[1].trim()
+        }
+    }
+    return typeof width === 'number' ? `${width - 10}px` : width
+}
 
+// Lấy row key
+const getRowKey = (record, index) => {
+    if (typeof props.rowKey === 'function') {
+        return props.rowKey(record, index)
+    }
+    return record[props.rowKey] || `row-${index}`
+}
+
+// Lấy số thứ tự
+const getRowIndex = (index) => {
+    return (currentPage.value - 1) * props.pagination.pageSize + index + 1
+}
+
+// Lấy classes cho header cell
+const getHeaderCellClasses = (column) => {
+    const classes = []
+    
     if (column.align === 'center') {
         classes.push('justify-center')
     } else if (column.align === 'right') {
@@ -354,8 +340,67 @@ const getCellClasses = (column) => {
     } else {
         classes.push('justify-start')
     }
-
+    
     return classes
+}
+
+// Lấy classes cho cell dựa trên column
+const getCellClasses = (column) => {
+    const classes = []
+    
+    if (column.align === 'center') {
+        classes.push('justify-center')
+    } else if (column.align === 'right') {
+        classes.push('justify-end')
+    } else {
+        classes.push('justify-start')
+    }
+    
+    return classes
+}
+
+// Lấy classes cho row
+const getRowClasses = (record) => {
+    const classes = ['cursor-pointer']
+    
+    if (selectedRowKeys.value.includes(record.key)) {
+        classes.push('bg-blue-50')
+    }
+    
+    return classes
+}
+
+// Lấy classes cho statistic value
+const getStatisticValueClasses = (column) => {
+    const classes = []
+    
+    if (column.align === 'center') {
+        classes.push('text-center')
+    } else if (column.align === 'right') {
+        classes.push('text-right')
+    } else {
+        classes.push('text-left')
+    }
+    
+    return classes
+}
+
+// Lấy giá trị thống kê
+const getStatisticValue = (dataIndex) => {
+    const stats = props.statistics
+    
+    switch (dataIndex) {
+        case 'quantity':
+            return formatNumber(stats.totalQuantity || 0)
+        case 'originalPrice':
+            return formatCurrency(stats.totalOriginalPrice || 0)
+        case 'depreciation':
+            return formatCurrency(stats.totalAnnualDecreciation || 0)
+        case 'remainingValue':
+            return formatCurrency(stats.totalRemainingValue || 0)
+        default:
+            return ''
+    }
 }
 
 // Hành động hiển thị
@@ -388,7 +433,7 @@ const handleRowClick = (record) => {
 
 // Format currency
 const formatCurrency = (value) => {
-    if (!value && value !== 0) return '0'
+    if (value === null || value === undefined) return '0'
     return new Intl.NumberFormat('vi-VN', {
         style: 'decimal',
         minimumFractionDigits: 0,
@@ -398,7 +443,7 @@ const formatCurrency = (value) => {
 
 // Format number cho số lượng
 const formatNumber = (value) => {
-    if (!value && value !== 0) return '0'
+    if (value === null || value === undefined) return '0'
     return new Intl.NumberFormat('vi-VN', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2
@@ -408,17 +453,13 @@ const formatNumber = (value) => {
 // Lấy tooltip cho cell
 const getCellTooltip = (value) => {
     if (!value) return ''
-    return value.toString()
+    return String(value)
 }
 
 // Xử lý scroll của container để đồng bộ với statistics
 const handleContainerScroll = () => {
-    if (scrollWrapperRef.value) {
-        // Phần statistics sẽ scroll cùng với bảng chính
-        const statisticsContainer = document.querySelector('.statistics-container')
-        if (statisticsContainer) {
-            statisticsContainer.scrollLeft = scrollWrapperRef.value.scrollLeft
-        }
+    if (scrollWrapperRef.value && statisticsRef.value) {
+        statisticsRef.value.scrollLeft = scrollWrapperRef.value.scrollLeft
     }
 }
 
@@ -468,37 +509,75 @@ onUnmounted(() => {
     min-width: 0;
 }
 
-/* Wrapper mới để xử lý scroll ngang */
+/* Wrapper để xử lý scroll ngang */
 .table-scroll-wrapper {
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow-x: auto;
     overflow-y: hidden;
+    scrollbar-width: thin;
 }
 
+/* Sử dụng CSS Grid với grid-template-columns động */
 .table-header {
-    flex-shrink: 0;
-    display: flex;
+    display: grid;
     background-color: #f9fafb;
     border-bottom: 1px solid #e5e7eb;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 20;
     min-width: min-content;
+    flex-shrink: 0;
+    /* Grid template columns mặc định */
+    grid-template-columns: 
+        40px    /* selection */
+        50px    /* STT */
+        minmax(100px, 1fr)    /* Mã tài sản */
+        minmax(120px, 2fr)    /* Tên tài sản */
+        minmax(100px, 1fr)    /* Loại tài sản */
+        minmax(120px, 1.5fr)  /* Bộ phận sử dụng */
+        minmax(70px, 0.7fr)   /* Số lượng */
+        minmax(100px, 1fr)    /* Nguyên giá */
+        minmax(100px, 1fr)    /* HM/KH lũy kế */
+        minmax(100px, 1fr)    /* Giá trị còn lại */
+        80px;   /* Chức năng */
+}
+
+.table-row {
+    display: grid;
+    background-color: white;
+    transition: background-color 0.15s ease;
+    box-sizing: border-box;
+    min-width: min-content;
+    flex-shrink: 0;
+    /* Sử dụng cùng grid template với header */
+    grid-template-columns: 
+        40px    /* selection */
+        50px    /* STT */
+        minmax(100px, 1fr)    /* Mã tài sản */
+        minmax(120px, 2fr)    /* Tên tài sản */
+        minmax(100px, 1fr)    /* Loại tài sản */
+        minmax(120px, 1.5fr)  /* Bộ phận sử dụng */
+        minmax(70px, 0.7fr)   /* Số lượng */
+        minmax(100px, 1fr)    /* Nguyên giá */
+        minmax(100px, 1fr)    /* HM/KH lũy kế */
+        minmax(100px, 1fr)    /* Giá trị còn lại */
+        80px;   /* Chức năng */
 }
 
 .table-header-cell {
-    height: 48px;
+    height: 40px;
     display: flex;
     align-items: center;
     background-color: #f9fafb;
     font-weight: 600;
     color: #374151;
-    font-size: 13px;
+    font-size: 12px;
     position: relative;
     user-select: none;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .table-header-cell:hover {
@@ -512,14 +591,9 @@ onUnmounted(() => {
     min-width: 0;
     position: relative;
     z-index: 1;
-}
-
-.table-row {
     display: flex;
-    background-color: white;
-    transition: background-color 0.2s;
-    box-sizing: border-box;
-    min-width: min-content;
+    flex-direction: column;
+    scrollbar-width: thin;
 }
 
 .table-row:hover {
@@ -527,14 +601,15 @@ onUnmounted(() => {
 }
 
 .table-cell {
-    height: 48px;
+    height: 40px;
     display: flex;
     align-items: center;
     color: #4b5563;
-    font-size: 13px;
+    font-size: 12px;
     overflow: hidden;
     box-sizing: border-box;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .action-buttons {
@@ -549,13 +624,13 @@ onUnmounted(() => {
 }
 
 .action-btn {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    border-radius: 4px;
+    border-radius: 3px;
     border: 1px solid transparent;
     background: transparent;
     cursor: pointer;
@@ -571,62 +646,50 @@ onUnmounted(() => {
     border-top: 1px solid #e5e7eb;
     background: white;
     flex-shrink: 0;
-    min-height: 60px;
+    min-height: 50px;
+    z-index: 10;
 }
 
 .pagination-info {
-    font-size: 14px;
+    font-size: 13px;
     color: #6b7280;
 }
 
 /* Statistics wrapper */
 .statistics-wrapper {
-    height: 40px;
     flex: 1;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     min-width: 0;
+    max-width: 100%;
 }
 
-.statistics-container {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    min-width: min-content;
+.statistics-content {
+    height: 36px;
+    gap: 4px;
     overflow-x: auto;
-    gap: 0;
+    scrollbar-width: thin;
 }
 
-.statistic-cell {
-    height: 100%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    padding: 0 8px;
-    box-sizing: border-box;
-}
-
-.statistic-placeholder-cell {
-    height: 100%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
+.statistic-item {
+    min-width: 0;
 }
 
 .statistic-value {
     white-space: nowrap;
-    height: 32px;
+    height: 28px;
     display: flex;
     align-items: center;
-    justify-content: center;
     border-radius: 4px;
     padding: 0 8px;
     width: 100%;
     box-sizing: border-box;
+    min-width: fit-content;
 }
 
 /* Scrollbar styling */
 .table-scroll-wrapper::-webkit-scrollbar {
     height: 8px;
+    display: block !important;
 }
 
 .table-scroll-wrapper::-webkit-scrollbar-track {
@@ -635,16 +698,18 @@ onUnmounted(() => {
 }
 
 .table-scroll-wrapper::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: #d1d5db;
     border-radius: 4px;
+    border: 2px solid #f1f1f1;
 }
 
 .table-scroll-wrapper::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    background: #9ca3af;
 }
 
 .table-body::-webkit-scrollbar {
     width: 8px;
+    display: block !important;
 }
 
 .table-body::-webkit-scrollbar-track {
@@ -653,52 +718,55 @@ onUnmounted(() => {
 }
 
 .table-body::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: #d1d5db;
     border-radius: 4px;
+    border: 2px solid #f1f1f1;
 }
 
 .table-body::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    background: #9ca3af;
 }
 
-/* Scrollbar cho statistics wrapper */
-.statistics-container::-webkit-scrollbar {
-    height: 6px;
+/* Scrollbar cho statistics */
+.statistics-content::-webkit-scrollbar {
+    height: 4px;
+    display: block !important;
 }
 
-.statistics-container::-webkit-scrollbar-track {
+.statistics-content::-webkit-scrollbar-track {
     background: #f1f1f1;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
-.statistics-container::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
+.statistics-content::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 2px;
 }
 
-.statistics-container::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+.statistics-content::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
 }
 
 /* Phân trang */
 .pagination-btn {
-    min-width: 32px;
-    height: 32px;
+    min-width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
     background: white;
     cursor: pointer;
-    padding: 0 4px;
-    font-size: 14px;
+    padding: 0 3px;
+    font-size: 13px;
     transition: all 0.2s ease;
     font-weight: 400;
+    border: 1px solid #d1d5db;
 }
 
 .pagination-btn:hover:not(:disabled) {
-    border-color: #C0C0C0;
-    color: #C0C0C0;
+    border-color: #9ca3af;
+    color: #374151;
 }
 
 .pagination-btn:disabled {
@@ -709,49 +777,344 @@ onUnmounted(() => {
 
 /* Nút trang hiện tại */
 .pagination-active {
-    background: #808080;
-    border-color: #808080;
+    background: #4b5563;
+    border-color: #4b5563;
     color: white;
     font-weight: 500;
 }
 
 .pagination-active:hover {
-    background: #808080;
-    border-color: #808080;
+    background: #4b5563;
+    border-color: #4b5563;
     color: white;
 }
 
 /* Nút điều hướng */
 .pagination-nav {
-    min-width: 28px;
-    width: 28px;
+    min-width: 24px;
+    width: 24px;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-@media (max-width: 1400px) {
-    .table-header-cell,
+/* ==================== RESPONSIVE BREAKPOINTS ==================== */
+
+/* 1. Màn hình 1366px và nhỏ hơn */
+@media (max-width: 1366px) {
+    .table-header,
+    .table-row {
+        grid-template-columns: 
+            35px    /* selection */
+            45px    /* STT */
+            minmax(90px, 1fr)     /* Mã tài sản */
+            minmax(110px, 1.5fr)  /* Tên tài sản */
+            minmax(90px, 0.8fr)   /* Loại tài sản */
+            minmax(100px, 1fr)    /* Bộ phận sử dụng */
+            minmax(60px, 0.5fr)   /* Số lượng */
+            minmax(90px, 0.9fr)   /* Nguyên giá */
+            minmax(90px, 0.9fr)   /* HM/KH lũy kế */
+            minmax(90px, 0.9fr)   /* Giá trị còn lại */
+            70px;   /* Chức năng */
+    }
+    
+    .table-header-cell {
+        height: 36px;
+        font-size: 11px;
+        padding: 0 6px;
+    }
+    
     .table-cell {
+        height: 36px;
+        font-size: 11px;
+        padding: 0 6px;
+    }
+    
+    .header-content {
+        padding: 8px 6px !important;
+    }
+    
+    .statistic-value {
+        font-size: 11px;
+        padding: 0 6px;
+        height: 26px;
+    }
+    
+    .pagination-btn {
+        min-width: 26px;
+        height: 26px;
         font-size: 12px;
     }
-
-    .statistic-value {
-        font-size: 13px;
-        padding: 0 6px;
+    
+    .pagination-nav {
+        min-width: 22px;
+        width: 22px;
+    }
+    
+    .action-btn {
+        width: 22px;
+        height: 22px;
     }
 }
 
+/* 2. Màn hình 1200px và nhỏ hơn */
 @media (max-width: 1200px) {
-    .statistics-wrapper {
-        max-width: 35vw;
+    .table-header,
+    .table-row {
+        grid-template-columns: 
+            35px    /* selection */
+            45px    /* STT */
+            minmax(80px, 1fr)     /* Mã tài sản */
+            minmax(100px, 1.2fr)  /* Tên tài sản */
+            minmax(80px, 0.7fr)   /* Loại tài sản */
+            minmax(90px, 0.9fr)   /* Bộ phận sử dụng */
+            minmax(55px, 0.5fr)   /* Số lượng */
+            minmax(80px, 0.8fr)   /* Nguyên giá */
+            minmax(80px, 0.8fr)   /* HM/KH lũy kế */
+            minmax(80px, 0.8fr)   /* Giá trị còn lại */
+            65px;   /* Chức năng */
     }
+}
+
+/* 3. Màn hình 1024px (Tablet Landscape) */
+@media (max-width: 1024px) {
+    .table-footer > div {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .statistics-wrapper {
+        max-width: 100%;
+        margin-left: 0;
+        margin-top: 8px;
+        width: 100%;
+    }
+    
+    .statistics-content {
+        justify-content: flex-start;
+        padding: 2px 0;
+        gap: 6px;
+    }
+    
+    .pagination-info {
+        font-size: 12px;
+    }
+    
+    .table-header,
+    .table-row {
+        grid-template-columns: 
+            35px    /* selection */
+            45px    /* STT */
+            minmax(70px, 1fr)     /* Mã tài sản */
+            minmax(90px, 1fr)     /* Tên tài sản */
+            minmax(70px, 0.6fr)   /* Loại tài sản */
+            minmax(80px, 0.8fr)   /* Bộ phận sử dụng */
+            minmax(50px, 0.4fr)   /* Số lượng */
+            minmax(70px, 0.7fr)   /* Nguyên giá */
+            minmax(70px, 0.7fr)   /* HM/KH lũy kế */
+            minmax(70px, 0.7fr)   /* Giá trị còn lại */
+            60px;   /* Chức năng */
+    }
+    
+    .table-header-cell,
+    .table-cell {
+        font-size: 10px;
+        padding: 0 4px;
+    }
+}
+
+/* 4. Màn hình 900px - Ẩn cột "Loại tài sản" */
+@media (max-width: 900px) {
+    .table-header,
+    .table-row {
+        grid-template-columns: 
+            35px    /* selection */
+            45px    /* STT */
+            minmax(70px, 1fr)     /* Mã tài sản */
+            minmax(90px, 1.2fr)   /* Tên tài sản */
+            /* Loại tài sản - Ẩn */
+            minmax(80px, 0.9fr)   /* Bộ phận sử dụng */
+            minmax(50px, 0.4fr)   /* Số lượng */
+            minmax(70px, 0.8fr)   /* Nguyên giá */
+            minmax(70px, 0.8fr)   /* HM/KH lũy kế */
+            minmax(70px, 0.8fr)   /* Giá trị còn lại */
+            60px;   /* Chức năng */
+    }
+    
+    /* Ẩn cột Loại tài sản */
+    .table-header-cell:nth-child(5),
+    .table-cell:nth-child(5) {
+        display: none;
+    }
+}
+
+/* 5. Màn hình 768px (Tablet Portrait) - Ẩn cột "Bộ phận sử dụng" */
+@media (max-width: 768px) {
+    .table-container {
+        font-size: 10px;
+    }
+    
+    .table-header,
+    .table-row {
+        grid-template-columns: 
+            35px    /* selection */
+            40px    /* STT */
+            minmax(60px, 1fr)     /* Mã tài sản */
+            minmax(80px, 1.5fr)   /* Tên tài sản */
+            /* Loại tài sản - Ẩn */
+            /* Bộ phận sử dụng - Ẩn */
+            minmax(45px, 0.4fr)   /* Số lượng */
+            minmax(60px, 0.8fr)   /* Nguyên giá */
+            minmax(60px, 0.8fr)   /* HM/KH lũy kế */
+            minmax(60px, 0.8fr)   /* Giá trị còn lại */
+            55px;   /* Chức năng */
+    }
+    
+    .table-header-cell {
+        height: 32px;
+        font-size: 10px;
+    }
+    
+    .table-cell {
+        height: 32px;
+        font-size: 10px;
+    }
+    
+    /* Ẩn các cột Loại tài sản và Bộ phận sử dụng */
+    .table-header-cell:nth-child(5),
+    .table-cell:nth-child(5),
+    .table-header-cell:nth-child(6),
+    .table-cell:nth-child(6) {
+        display: none;
+    }
+    
+    .action-btn {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .pagination-btn {
+        min-width: 24px;
+        height: 24px;
+        font-size: 11px;
+        padding: 0 2px;
+    }
+    
+    .pagination-nav {
+        min-width: 20px;
+        width: 20px;
+    }
+    
+    .statistic-value {
+        font-size: 10px;
+        padding: 0 4px;
+        height: 24px;
+    }
+}
+
+/* 6. Màn hình 640px (Mobile lớn) - Ẩn thêm cột số tiền */
+@media (max-width: 640px) {
+    .table-header,
+    .table-row {
+        grid-template-columns: 
+            30px    /* selection */
+            35px    /* STT */
+            minmax(50px, 1fr)     /* Mã tài sản */
+            minmax(70px, 1.5fr)   /* Tên tài sản */
+            /* Loại tài sản - Ẩn */
+            /* Bộ phận sử dụng - Ẩn */
+            minmax(40px, 0.4fr)   /* Số lượng */
+            minmax(50px, 0.8fr)   /* Nguyên giá */
+            /* HM/KH lũy kế - Ẩn */
+            minmax(50px, 0.8fr)   /* Giá trị còn lại */
+            50px;   /* Chức năng */
+    }
+    
+    /* Ẩn các cột không cần thiết */
+    .table-header-cell:nth-child(5),
+    .table-cell:nth-child(5),
+    .table-header-cell:nth-child(6),
+    .table-cell:nth-child(6),
+    .table-header-cell:nth-child(9),
+    .table-cell:nth-child(9) {
+        display: none;
+    }
+    
+    .statistics-content {
+        gap: 2px;
+    }
+    
+    .statistic-item {
+        padding: 0 2px;
+    }
+}
+
+/* 7. Màn hình 480px (Mobile nhỏ) */
+@media (max-width: 480px) {
+    .table-header,
+    .table-row {
+        grid-template-columns: 
+            25px    /* selection */
+            30px    /* STT */
+            minmax(40px, 1fr)     /* Mã tài sản */
+            minmax(60px, 1.5fr)   /* Tên tài sản */
+            /* Loại tài sản - Ẩn */
+            /* Bộ phận sử dụng - Ẩn */
+            minmax(35px, 0.3fr)   /* Số lượng */
+            minmax(45px, 0.7fr)   /* Nguyên giá */
+            /* HM/KH lũy kế - Ẩn */
+            minmax(45px, 0.7fr)   /* Giá trị còn lại */
+            45px;   /* Chức năng */
+    }
+    
+    .table-header-cell {
+        height: 28px;
+        font-size: 9px;
+        padding: 0 2px;
+    }
+    
+    .table-cell {
+        height: 28px;
+        font-size: 9px;
+        padding: 0 2px;
+    }
+    
+    .pagination-info {
+        font-size: 10px;
+    }
+}
+
+/* Đảm bảo không bị tràn */
+.table-container {
+    contain: layout style;
+    will-change: transform;
 }
 
 /* Fix cho Firefox */
+@supports (-moz-appearance:none) {
+    .table-header,
+    .table-row {
+        min-width: -moz-min-content;
+    }
+}
+
+/* Đảm bảo grid không wrap */
 .table-header,
 .table-row {
-    min-width: -moz-min-content;
+    grid-auto-flow: column;
+}
+
+/* Tối ưu khi in */
+@media print {
+    .table-scroll-wrapper {
+        overflow: visible !important;
+    }
+    
+    .table-header,
+    .table-row {
+        grid-template-columns: 40px 50px 100px 140px 100px 120px 70px 100px 100px 100px 80px !important;
+    }
 }
 </style>
