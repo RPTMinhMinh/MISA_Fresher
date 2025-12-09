@@ -52,9 +52,6 @@ export function useAsset() {
         })
       ]);
 
-      console.log('API Response:', assetsResponse)
-      console.log('Statistics API Response:', statsResponse)
-
       // Xử lý dữ liệu tài sản
       if (assetsResponse && assetsResponse.success && assetsResponse.data) {
         const apiData = assetsResponse.data

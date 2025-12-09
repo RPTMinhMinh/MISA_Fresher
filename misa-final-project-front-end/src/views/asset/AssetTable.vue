@@ -13,11 +13,6 @@
                         <div class="header-content px-3 py-3 font-semibold text-gray-700 text-sm truncate select-none">
                             {{ column.title }}
                         </div>
-
-                        <!-- Resize handle -->
-                        <div v-if="column.resizable"
-                            class="resize-handle absolute right-0 top-0 bottom-0 w-1 cursor-col-resize z-10 hover:bg-blue-400 active:bg-blue-600"
-                            @mousedown="(e) => startResize(e, column.key)"></div>
                     </div>
                 </div>
 
@@ -134,48 +129,47 @@
                     </div>
                 </div>
 
-                <!-- Phần bên phải: Statistics với layout đúng cột -->
-                <div class="statistics-wrapper overflow-x-auto flex-1 ml-4 max-w-[50vw]" ref="statisticsWrapperRef">
-                    <div class="statistics-container flex" :style="headerStyle">
-                        <!-- Placeholders cho các cột trước cột số lượng -->
-                        <div v-for="(col, index) in columnsBeforeQuantity" :key="`placeholder-${index}`"
-                            class="statistic-placeholder flex-shrink-0" :style="getColumnStyle(col)"></div>
-
-                        <!-- Statistics cells -->
-                        <div class="statistic-cell flex-shrink-0 px-3 py-1" :style="getStatisticColumnStyle('quantity')">
-                            <div
-                                class="statistic-value text-sm font-semibold text-gray-900 text-center bg-gray-100 rounded px-2 py-1">
+                <!-- Phần bên phải: Statistics đơn giản -->
+                <div class="statistics-wrapper flex-1 ml-4 min-w-0">
+                    <div class="statistics-container flex overflow-x-auto">
+                        <!-- Cột selection (50px) -->
+                        
+                        <!-- Cột STT (60px) -->
+                        
+                        <!-- Các cột thông tin tài sản - để trống để giữ vị trí -->
+                        <div class="statistic-placeholder-cell" style="width: 150px; min-width: 140px;"></div> <!-- Loại tài sản -->
+                        <div class="statistic-placeholder-cell" style="width: 160px; min-width: 160px;"></div> <!-- Bộ phận sử dụng -->
+                        
+                        <!-- Số lượng -->
+                        <div class="statistic-cell flex-shrink-0 px-3 py-1" style="width: 90px; min-width: 90px;">
+                            <div class="statistic-value text-sm font-semibold text-gray-900 text-center rounded px-2 py-1">
                                 {{ formatNumber(statistics.totalQuantity) }}
                             </div>
                         </div>
-
-                        <div class="statistic-cell flex-shrink-0 px-3 py-1"
-                            :style="getStatisticColumnStyle('originalPrice')">
-                            <div
-                                class="statistic-value text-sm font-semibold text-gray-900 text-right bg-gray-100 rounded px-2 py-1">
+                        
+                        <!-- Nguyên giá -->
+                        <div class="statistic-cell flex-shrink-0 px-3 py-1" style="width: 123px; min-width: 120px;">
+                            <div class="statistic-value text-sm font-semibold text-gray-900 text-right rounded px-2 py-1">
                                 {{ formatCurrency(statistics.totalOriginalPrice) }}
                             </div>
                         </div>
-
-                        <div class="statistic-cell flex-shrink-0 px-3 py-1"
-                            :style="getStatisticColumnStyle('depreciation')">
-                            <div
-                                class="statistic-value text-sm font-semibold text-gray-900 text-right bg-gray-100 rounded px-2 py-1">
+                        
+                        <!-- HM/KH lũy kế -->
+                        <div class="statistic-cell flex-shrink-0 px-3 py-1" style="width: 140px; min-width: 130px;">
+                            <div class="statistic-value text-sm font-semibold text-gray-900 text-right rounded px-2 py-1">
                                 {{ formatCurrency(statistics.totalAnnualDecreciation) }}
                             </div>
                         </div>
-
-                        <div class="statistic-cell flex-shrink-0 px-3 py-1"
-                            :style="getStatisticColumnStyle('remainingValue')">
-                            <div
-                                class="statistic-value text-sm font-semibold text-gray-900 text-right bg-gray-100 rounded px-2 py-1">
+                        
+                        <!-- Giá trị còn lại -->
+                        <div class="statistic-cell flex-shrink-0 px-3 py-1" style="width: 113px; min-width: 100px;">
+                            <div class="statistic-value text-sm font-semibold text-gray-900 text-right rounded px-2 py-1">
                                 {{ formatCurrency(statistics.totalRemainingValue) }}
                             </div>
                         </div>
-
-                        <!-- Placeholders cho các cột sau cột giá trị còn lại -->
-                        <div v-for="(col, index) in columnsAfterRemainingValue" :key="`placeholder-after-${index}`"
-                            class="statistic-placeholder flex-shrink-0" :style="getColumnStyle(col)"></div>
+                        
+                        <!-- Cột action (100px) -->
+                        <div class="statistic-placeholder-cell" style="width: 100px; min-width: 100px;"></div>
                     </div>
                 </div>
             </div>
@@ -226,7 +220,7 @@ const props = defineProps({
 })
 
 // Emits
-const emit = defineEmits(['selection-change', 'row-click', 'edit', 'copy', 'page-change', 'page-size-change', 'column-resize'])
+const emit = defineEmits(['selection-change', 'row-click', 'edit', 'copy', 'page-change', 'page-size-change'])
 
 // State
 const selectedRowKeys = ref([])
@@ -234,16 +228,8 @@ const hoveredRowKey = ref(null)
 const tableContainerRef = ref(null)
 const headerRef = ref(null)
 const bodyRef = ref(null)
-const statisticsWrapperRef = ref(null)
 const scrollWrapperRef = ref(null)
 const internalPageSize = ref(props.pagination.pageSize || 10)
-
-// Resize state
-const resizingColumn = ref(null)
-const startX = ref(0)
-const startWidth = ref(0)
-const columnWidths = ref({})
-const isResizing = ref(false)
 
 // Options cho dropdown số bản ghi/trang
 const pageSizeOptions = [
@@ -303,27 +289,26 @@ const displayedPages = computed(() => {
 
 // Columns mặc định
 const defaultColumns = [
-    { title: '', key: 'selection', dataIndex: 'selection', width: 50, align: 'center', resizable: false, fixed: 'left' },
-    { title: 'STT', key: 'index', width: 60, align: 'center', resizable: false, fixed: 'left' },
-    { title: 'Mã tài sản', dataIndex: 'assetCode', key: 'assetCode', minWidth: 140, resizable: true },
-    { title: 'Tên tài sản', dataIndex: 'assetName', key: 'assetName', minWidth: 180, resizable: true },
-    { title: 'Loại tài sản', dataIndex: 'assetType', key: 'assetType', minWidth: 140, resizable: true },
-    { title: 'Bộ phận sử dụng', dataIndex: 'department', key: 'department', minWidth: 160, resizable: true },
-    { title: 'Số lượng', dataIndex: 'quantity', key: 'quantity', width: 80, align: 'center', resizable: true },
-    { title: 'Nguyên giá', dataIndex: 'originalPrice', key: 'originalPrice', width: 120, align: 'right', resizable: true },
-    { title: 'HM/KH lũy kế', dataIndex: 'depreciation', key: 'depreciation', width: 120, align: 'right', resizable: true },
-    { title: 'Giá trị còn lại', dataIndex: 'remainingValue', key: 'remainingValue', width: 120, align: 'right', resizable: true },
-    { title: 'Chức năng', key: 'action', width: 100, align: 'center', resizable: false, fixed: 'right' }
+    { title: '', key: 'selection', dataIndex: 'selection', width: 50, align: 'center', fixed: 'left' },
+    { title: 'STT', key: 'index', width: 60, align: 'center', fixed: 'left' },
+    { title: 'Mã tài sản', dataIndex: 'assetCode', key: 'assetCode', minWidth: 140 },
+    { title: 'Tên tài sản', dataIndex: 'assetName', key: 'assetName', minWidth: 180 },
+    { title: 'Loại tài sản', dataIndex: 'assetType', key: 'assetType', minWidth: 140 },
+    { title: 'Bộ phận sử dụng', dataIndex: 'department', key: 'department', minWidth: 160 },
+    { title: 'Số lượng', dataIndex: 'quantity', key: 'quantity', width: 90, align: 'center' },
+    { title: 'Nguyên giá', dataIndex: 'originalPrice', key: 'originalPrice', width: 120, align: 'right' },
+    { title: 'HM/KH lũy kế', dataIndex: 'depreciation', key: 'depreciation', width: 130, align: 'right' },
+    { title: 'Giá trị còn lại', dataIndex: 'remainingValue', key: 'remainingValue', width: 130, align: 'right' },
+    { title: 'Chức năng', key: 'action', width: 100, align: 'center', fixed: 'right' }
 ]
 
-// Xử lý columns với resize
+// Xử lý columns
 const processedColumns = computed(() => {
     const cols = props.columns && props.columns.length > 0 ? props.columns : defaultColumns
     return cols.map((col) => {
-        const width = columnWidths.value[col.key] || col.width || col.minWidth || 100
         return {
             ...col,
-            width: width
+            width: col.width || col.minWidth || 100
         }
     })
 })
@@ -331,7 +316,7 @@ const processedColumns = computed(() => {
 // Tính tổng chiều rộng của tất cả các cột
 const totalWidth = computed(() => {
     return processedColumns.value.reduce((total, col) => {
-        const width = columnWidths.value[col.key] || col.width || col.minWidth || 100
+        const width = col.width || col.minWidth || 100
         return total + (typeof width === 'number' ? width : parseInt(width, 10))
     }, 0)
 })
@@ -350,40 +335,13 @@ const rowStyle = computed(() => {
 
 // Lấy style cho mỗi column
 const getColumnStyle = (col) => {
-    const width = columnWidths.value[col.key] || col.width || col.minWidth || 100
+    const width = col.width || col.minWidth || 100
     return {
         width: `${width}px`,
         minWidth: `${width}px`,
         maxWidth: `${width}px`
     }
 }
-
-// Lấy style cho cột thống kê
-const getStatisticColumnStyle = (dataIndex) => {
-    const col = processedColumns.value.find(c => c.dataIndex === dataIndex)
-    if (!col) return {}
-
-    const width = columnWidths.value[col.key] || col.width || col.minWidth || 100
-    return {
-        width: `${width}px`,
-        minWidth: `${width}px`,
-        maxWidth: `${width}px`
-    }
-}
-
-// Lấy các cột trước cột số lượng
-const columnsBeforeQuantity = computed(() => {
-    const cols = processedColumns.value
-    const quantityIndex = cols.findIndex(col => col.dataIndex === 'quantity')
-    return cols.slice(0, quantityIndex)
-})
-
-// Lấy các cột sau cột giá trị còn lại
-const columnsAfterRemainingValue = computed(() => {
-    const cols = processedColumns.value
-    const remainingValueIndex = cols.findIndex(col => col.dataIndex === 'remainingValue')
-    return cols.slice(remainingValueIndex + 1)
-})
 
 // Lấy classes cho cell dựa trên column
 const getCellClasses = (column) => {
@@ -455,52 +413,13 @@ const getCellTooltip = (value) => {
 
 // Xử lý scroll của container để đồng bộ với statistics
 const handleContainerScroll = () => {
-    if (scrollWrapperRef.value && statisticsWrapperRef.value) {
-        statisticsWrapperRef.value.scrollLeft = scrollWrapperRef.value.scrollLeft
+    if (scrollWrapperRef.value) {
+        // Phần statistics sẽ scroll cùng với bảng chính
+        const statisticsContainer = document.querySelector('.statistics-container')
+        if (statisticsContainer) {
+            statisticsContainer.scrollLeft = scrollWrapperRef.value.scrollLeft
+        }
     }
-}
-
-// Resize handlers
-const startResize = (e, columnKey) => {
-    e.preventDefault()
-    e.stopPropagation()
-
-    resizingColumn.value = columnKey
-    startX.value = e.clientX
-    isResizing.value = true
-
-    const column = processedColumns.value.find(col => col.key === columnKey)
-    if (column) {
-        startWidth.value = columnWidths.value[columnKey] || column.width || column.minWidth || 100
-    }
-
-    document.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseup', stopResize)
-
-    document.body.classList.add('resizing-column')
-    document.body.style.cursor = 'col-resize'
-    document.body.style.userSelect = 'none'
-}
-
-const handleMouseMove = (e) => {
-    if (!resizingColumn.value || !isResizing.value) return
-
-    const diff = e.clientX - startX.value
-    const newWidth = Math.max(80, startWidth.value + diff)
-
-    columnWidths.value[resizingColumn.value] = newWidth
-
-    emit('column-resize', { columnKey: resizingColumn.value, width: newWidth })
-}
-
-const stopResize = () => {
-    resizingColumn.value = null
-    isResizing.value = false
-    document.removeEventListener('mousemove', handleMouseMove)
-    document.removeEventListener('mouseup', stopResize)
-    document.body.classList.remove('resizing-column')
-    document.body.style.cursor = ''
-    document.body.style.userSelect = ''
 }
 
 // Pagination handlers
@@ -518,20 +437,7 @@ watch(() => props.pagination.pageSize, (newSize) => {
     internalPageSize.value = newSize || 10
 }, { immediate: true })
 
-// Watch columnWidths để cập nhật layout
-watch(columnWidths, () => {
-    // Force re-render
-    nextTick()
-}, { deep: true })
-
 onMounted(() => {
-    // Khởi tạo column widths từ columns
-    processedColumns.value.forEach(col => {
-        if (!columnWidths.value[col.key] && col.width) {
-            columnWidths.value[col.key] = col.width
-        }
-    })
-
     // Đảm bảo scroll handler được gắn
     if (scrollWrapperRef.value) {
         scrollWrapperRef.value.addEventListener('scroll', handleContainerScroll)
@@ -542,10 +448,6 @@ onUnmounted(() => {
     if (scrollWrapperRef.value) {
         scrollWrapperRef.value.removeEventListener('scroll', handleContainerScroll)
     }
-
-    // Cleanup event listeners
-    document.removeEventListener('mousemove', handleMouseMove)
-    document.removeEventListener('mouseup', stopResize)
 })
 </script>
 
@@ -682,7 +584,6 @@ onUnmounted(() => {
     height: 40px;
     flex: 1;
     margin-left: 1rem;
-    max-width: 50vw;
     min-width: 0;
 }
 
@@ -691,14 +592,20 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     min-width: min-content;
-}
-
-.statistic-placeholder {
-    height: 100%;
-    flex-shrink: 0;
+    overflow-x: auto;
+    gap: 0;
 }
 
 .statistic-cell {
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.statistic-placeholder-cell {
     height: 100%;
     flex-shrink: 0;
     display: flex;
@@ -707,36 +614,14 @@ onUnmounted(() => {
 
 .statistic-value {
     white-space: nowrap;
-    width: 100%;
     height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
     padding: 0 8px;
-}
-
-/* Resize handle */
-.resize-handle {
-    background: transparent;
-    transition: background-color 0.2s;
-}
-
-.resize-handle:hover {
-    background-color: #1890ff !important;
-}
-
-.resize-handle:active {
-    background-color: #096dd9 !important;
-}
-
-/* Style cho resize indicator */
-body.resizing-column {
-    cursor: col-resize !important;
-}
-
-body.resizing-column * {
-    cursor: col-resize !important;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Scrollbar styling */
@@ -777,21 +662,21 @@ body.resizing-column * {
 }
 
 /* Scrollbar cho statistics wrapper */
-.statistics-wrapper::-webkit-scrollbar {
+.statistics-container::-webkit-scrollbar {
     height: 6px;
 }
 
-.statistics-wrapper::-webkit-scrollbar-track {
+.statistics-container::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
 }
 
-.statistics-wrapper::-webkit-scrollbar-thumb {
+.statistics-container::-webkit-scrollbar-thumb {
     background: #c1c1c1;
     border-radius: 4px;
 }
 
-.statistics-wrapper::-webkit-scrollbar-thumb:hover {
+.statistics-container::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
 }
 
@@ -807,10 +692,8 @@ body.resizing-column * {
     cursor: pointer;
     padding: 0 4px;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.88);
     transition: all 0.2s ease;
     font-weight: 400;
-    border: 1px solid #d1d5db;
 }
 
 .pagination-btn:hover:not(:disabled) {
@@ -857,10 +740,6 @@ body.resizing-column * {
     .statistic-value {
         font-size: 13px;
         padding: 0 6px;
-    }
-
-    .statistics-wrapper {
-        max-width: 40vw;
     }
 }
 

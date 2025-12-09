@@ -116,6 +116,8 @@ export class AssetService extends ApiService {
         }
       })
 
+      console.log('param-code ',params.assetTypeCode);
+      console.log('queryParam: ',queryParams);
       const response = await this.get(`${this.endpoint}/statistics`, queryParams)
       return this.handleResponse(response)
     } catch (error) {
