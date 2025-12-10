@@ -6,6 +6,7 @@ using MISA.QLTS.Core.Interfaces.Services;
 using MISA.QLTS.Core.Mappers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,23 @@ namespace MISA.QLTS.Core.Services
         /// <exception cref="KeyNotFoundException">Khi không tìm thấy phòng ban hoặc loại tài sản</exception>
         public async Task<AssetResponseDto> CreateAssetAsync(CreateAssetDto createAssetDto)
         {
+            var context = new ValidationContext(createAssetDto);
+            var validationResults = new List<ValidationResult>();
+            bool isValid = Validator.TryValidateObject(createAssetDto, context, validationResults, true);
+
+            if (!isValid)
+            {
+                var errorMessages = validationResults.Select(vr => vr.ErrorMessage).ToList();
+                throw new ArgumentException($"Dữ liệu không hợp lệ: {string.Join("; ", errorMessages)}");
+            }
+
+            //Kiểm tra mã tài sản không trùng
+            var existingAsset = await _assetRepository.GetByCodeAsync(createAssetDto.AssetCode);
+            if (existingAsset != null)
+            {
+                throw new ArgumentException($"Mã tài sản '{createAssetDto.AssetCode}' đã tồn tại trong hệ thống");
+            }
+
             var department = await _departmentRepository.GetByCodeAsync(createAssetDto.DepartmentCode);
             if (department == null)
             {
@@ -54,19 +72,15 @@ namespace MISA.QLTS.Core.Services
                 throw new KeyNotFoundException($"Không tìm thấy loại tài sản với mã: {createAssetDto.AssetTypeCode}");
             }
 
-            var nextAssetCode = await _assetRepository.GetNextAssetCodeAsync();
 
             var asset = AssetMapper.ToEntity(
                 createAssetDto,
                 Guid.NewGuid(),
-                nextAssetCode,
+                createAssetDto.AssetCode,
                 department.DepartmentId,
                 assetType.AssetTypeId,
-                assetType.UsefulLife,
-                assetType.RecreciationRate
+                assetType.UsefulLife
             );
-
-            AssetMapper.CalculateAssetFields(asset, assetType);
 
             var createdAsset = await _assetRepository.CreateAsset(asset);
 
@@ -213,6 +227,16 @@ namespace MISA.QLTS.Core.Services
             if (existingAsset == null)
                 throw new KeyNotFoundException($"Không tìm thấy tài sản với mã: {assetCode}");
 
+            var context = new ValidationContext(updateAssetDto);
+            var validationResults = new List<ValidationResult>();
+            bool isValid = Validator.TryValidateObject(updateAssetDto, context, validationResults, true);
+
+            if (!isValid)
+            {
+                var errorMessages = validationResults.Select(vr => vr.ErrorMessage).ToList();
+                throw new ArgumentException($"Dữ liệu cập nhật không hợp lệ: {string.Join("; ", errorMessages)}");
+            }
+
             // 2. Lấy thông tin department và asset type cũ
             var oldDepartment = await _departmentRepository.GetByCodeAsync(
                 (await _departmentRepository.GetAllAsync())
@@ -248,9 +272,7 @@ namespace MISA.QLTS.Core.Services
                 existingAsset,
                 updateAssetDto,
                 newDepartment,
-                newAssetType,
-                oldDepartment,
-                oldAssetType
+                newAssetType
             );
 
             // 6. Lưu vào database

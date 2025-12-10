@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MISA.QLTS.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+802f4cb0b036372041c4e2eb01a19602ab9503f1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb94e18ba1c59ce441c890b5ea10f72161652002")]
 [assembly: System.Reflection.AssemblyProductAttribute("MISA.QLTS.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MISA.QLTS.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

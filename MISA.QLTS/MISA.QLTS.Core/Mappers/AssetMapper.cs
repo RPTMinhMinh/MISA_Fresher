@@ -51,12 +51,11 @@ namespace MISA.QLTS.Core.Mappers
         /// <param name="departmentId">Định danh phòng ban</param>
         /// <param name="assetTypeId">Định danh loại tài sản</param>
         /// <param name="usefulLife">Thời gian sử dụng hữu ích</param>
-        /// <param name="decreciationRate">Tỷ lệ khấu hao</param>
         /// <returns>Thực thể Asset đã được tạo</returns>
         public static Asset ToEntity(CreateAssetDto dto, Guid assetId, string assetCode,
-         Guid departmentId, Guid assetTypeId, decimal usefulLife, decimal decreciationRate)
+            Guid departmentId, Guid assetTypeId, decimal usefulLife)
         {
-            return new Asset
+            var asset = new Asset
             {
                 AssetId = assetId,
                 AssetCode = assetCode,
@@ -67,8 +66,12 @@ namespace MISA.QLTS.Core.Mappers
                 Quantity = dto.Quantity,
                 OriginalPrice = dto.OriginalPrice,
                 UsefulLife = usefulLife,
-                DecreciationRate = decreciationRate
+                DecreciationRate = dto.DecreciationRate
             };
+
+            CalculateAssetFields(asset);
+
+            return asset;
         }
 
         /// <summary>
@@ -76,21 +79,13 @@ namespace MISA.QLTS.Core.Mappers
         /// </summary>
         /// <param name="asset">Thực thể Asset cần tính toán</param>
         /// <param name="assetType">Thông tin loại tài sản để lấy dữ liệu tham chiếu</param>
-        public static void CalculateAssetFields(Asset asset, AssetType assetType)
+        private static void CalculateAssetFields(Asset asset)
         {
-            // Trường năm sử dụng = năm của ngày mua
+            // 1. Các trường phụ thuộc thời gian
             asset.UseYear = asset.CreatedDate.Year;
-
-            // Trường năm bắt đầu theo dõi = năm của ngày mua
             asset.TrackingStartYear = asset.CreatedDate.Year;
 
-            // Số năm sử dụng lấy từ loại tài sản
-            asset.UsefulLife = assetType.UsefulLife;
-
-            // Tỉ lệ hao mòn lấy từ loại tài sản
-            asset.DecreciationRate = assetType.RecreciationRate;
-
-            // Giá trị hao mòn năm = Nguyên giá * Tỉ lệ hao mòn / 100
+            // 2. CÔNG THỨC CỐ ĐỊNH: Tính AnnualDecreciation
             asset.AnnualDecreciation = Math.Round(
                 asset.OriginalPrice * asset.DecreciationRate / 100,
                 4,
@@ -108,8 +103,7 @@ namespace MISA.QLTS.Core.Mappers
         /// <param name="oldAssetType">Thông tin loại tài sản cũ</param>
         /// <returns>Thực thể Asset đã được cập nhật</returns>
         public static Asset UpdateEntity(Asset asset, UpdateAssetDto dto,
-        Department? department = null, AssetType? assetType = null,
-        Department? oldDepartment = null, AssetType? oldAssetType = null)
+        Department? department = null, AssetType? assetType = null)
         {
             if (!string.IsNullOrWhiteSpace(dto.AssetName))
                 asset.AssetName = dto.AssetName;
@@ -120,20 +114,36 @@ namespace MISA.QLTS.Core.Mappers
 
             if (dto.Quantity.HasValue) asset.Quantity = dto.Quantity.Value;
 
-            if (dto.OriginalPrice.HasValue) asset.OriginalPrice = dto.OriginalPrice.Value;
+            bool needRecalculate = false;
 
-            if (dto.CreatedDate.HasValue) asset.CreatedDate = dto.CreatedDate.Value;
-
-            // Nếu có thay đổi về department, assetType, createdDate, hoặc originalPrice
-            // thì cần tính toán lại các trường phụ thuộc
-            if (department != null || assetType != null || dto.CreatedDate.HasValue || dto.OriginalPrice.HasValue)
+            if (dto.OriginalPrice.HasValue)
             {
-                // Lấy assetType mới nếu có, nếu không dùng assetType cũ
-                var currentAssetType = assetType ?? oldAssetType;
-                if (currentAssetType != null)
-                {
-                    CalculateAssetFields(asset, currentAssetType);
-                }
+                asset.OriginalPrice = dto.OriginalPrice.Value;
+                needRecalculate = true;
+            }
+
+            if (dto.DecreciationRate.HasValue)
+            {
+                asset.DecreciationRate = dto.DecreciationRate.Value;
+                needRecalculate = true;
+            }
+
+            if (dto.CreatedDate.HasValue)
+            {
+                asset.CreatedDate = dto.CreatedDate.Value;
+                needRecalculate = true;
+            }
+
+            if (assetType != null)
+            {
+                asset.AssetTypeId = assetType.AssetTypeId;
+                asset.UsefulLife = assetType.UsefulLife;
+            }
+
+            // Nếu có thay đổi các trường ảnh hưởng đến tính toán
+            if (needRecalculate)
+            {
+                CalculateAssetFields(asset);
             }
 
             return asset;

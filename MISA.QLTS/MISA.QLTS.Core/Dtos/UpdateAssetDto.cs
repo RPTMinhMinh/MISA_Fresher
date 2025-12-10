@@ -28,5 +28,8 @@ namespace MISA.QLTS.Core.Dtos
         public decimal? OriginalPrice { get; set; }
 
         public DateTime? CreatedDate { get; set; }
+
+        [Range(0, 100, ErrorMessage = "Tỉ lệ hao mòn phải từ 0 đến 100")]
+        public decimal? DecreciationRate { get; set; }
     }
 }

@@ -78,7 +78,7 @@
                                 </div>
 
                                 <!-- Các cột số tiền -->
-                                <div v-else-if="['originalPrice', 'depreciation', 'remainingValue'].includes(column.dataIndex)"
+                                <div v-else-if="['originalPrice', 'decreciation', 'remainingValue'].includes(column.dataIndex)"
                                     class="flex items-center justify-end h-full px-2 py-2">
                                     {{ formatCurrency(record[column.dataIndex]) }}
                                 </div>
@@ -272,7 +272,7 @@ const defaultColumns = [
     { title: 'Bộ phận sử dụng', dataIndex: 'department', key: 'department', width: 'minmax(120px, 1.5fr)', minWidth: '120px' },
     { title: 'Số lượng', dataIndex: 'quantity', key: 'quantity', width: 'minmax(70px, 0.7fr)', align: 'center' },
     { title: 'Nguyên giá', dataIndex: 'originalPrice', key: 'originalPrice', width: 'minmax(100px, 1fr)', align: 'right' },
-    { title: 'HM/KH lũy kế', dataIndex: 'depreciation', key: 'depreciation', width: 'minmax(100px, 1fr)', align: 'right' },
+    { title: 'HM/KH lũy kế', dataIndex: 'decreciation', key: 'decreciation', width: 'minmax(100px, 1fr)', align: 'right' },
     { title: 'Giá trị còn lại', dataIndex: 'remainingValue', key: 'remainingValue', width: 'minmax(100px, 1fr)', align: 'right' },
     { title: 'Chức năng', key: 'action', width: '80px', align: 'center', fixed: 'right' }
 ]
@@ -290,7 +290,7 @@ const processedColumns = computed(() => {
 // Chỉ lấy các columns cần hiển thị thống kê
 const statisticColumns = computed(() => {
     return processedColumns.value.filter(col => 
-        ['quantity', 'originalPrice', 'depreciation', 'remainingValue'].includes(col.dataIndex)
+        ['quantity', 'originalPrice', 'decreciation', 'remainingValue'].includes(col.dataIndex)
     )
 })
 
@@ -394,7 +394,7 @@ const getStatisticValue = (dataIndex) => {
             return formatNumber(stats.totalQuantity || 0)
         case 'originalPrice':
             return formatCurrency(stats.totalOriginalPrice || 0)
-        case 'depreciation':
+        case 'decreciation':
             return formatCurrency(stats.totalAnnualDecreciation || 0)
         case 'remainingValue':
             return formatCurrency(stats.totalRemainingValue || 0)

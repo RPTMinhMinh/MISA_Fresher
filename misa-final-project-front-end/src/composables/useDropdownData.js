@@ -31,7 +31,7 @@ export function useDropdownData() {
           data: {
             ...item,
             usefulLife: item.usefulLife,
-            depreciationRate: item.recreciationRate,
+            decreciationRate: item.recreciationRate,
           },
         }))
 
@@ -42,7 +42,7 @@ export function useDropdownData() {
           data: {
             ...item,
             usefulLife: item.usefulLife,
-            depreciationRate: item.recreciationRate,
+            decreciationRate: item.recreciationRate,
             assetTypeName: item.assetTypeName, // Lưu tên để dùng khi cần
           },
         }))

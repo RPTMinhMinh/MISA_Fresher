@@ -66,7 +66,7 @@ export function useAsset() {
           department: item.departmentName,
           quantity: item.quantity,
           originalPrice: item.originalPrice,
-          depreciation: item.annualDecreciation,
+          decreciation: item.annualDecreciation,
           remainingValue: item.originalPrice - item.annualDecreciation,
           departmentCode: item.departmentCode,
           assetTypeCode: item.assetTypeCode,
@@ -74,6 +74,8 @@ export function useAsset() {
           usefulLife: item.usefulLife,
           trackingStartYear: item.trackingStartYear,
           decreciationRate: item.decreciationRate,
+          purchaseDate: item.purchaseDate,
+          startDate: item.startDate,
           createdDate: item.createdDate
         }))
 

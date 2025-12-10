@@ -1085,14 +1085,21 @@
       },
       "CreateAssetDto": {
         "required": [
+          "assetCode",
           "assetName",
           "assetTypeCode",
+          "decreciationRate",
           "departmentCode",
           "originalPrice",
           "quantity"
         ],
         "type": "object",
         "properties": {
+          "assetCode": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
           "assetName": {
             "maxLength": 100,
             "minLength": 1,
@@ -1115,6 +1122,12 @@
           },
           "originalPrice": {
             "minimum": 0.0001,
+            "type": "number",
+            "format": "double"
+          },
+          "decreciationRate": {
+            "maximum": 100,
+            "minimum": 0,
             "type": "number",
             "format": "double"
           },
@@ -1354,6 +1367,13 @@
           "createdDate": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "decreciationRate": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
             "nullable": true
           }
         },

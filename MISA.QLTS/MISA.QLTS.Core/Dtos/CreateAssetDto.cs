@@ -12,6 +12,10 @@ namespace MISA.QLTS.Core.Dtos
     /// </summary>
     public class CreateAssetDto
     {
+        [Required(ErrorMessage = "Mã tài sản là bắt buộc")]
+        [StringLength(20, ErrorMessage = "Mã tài sản không được vượt quá 20 ký tự")]
+        public string AssetCode { get; set; }
+
         [Required(ErrorMessage = "Tên tài sản là bắt buộc")]
         [MaxLength(100, ErrorMessage = "Tên tài sản không được vượt quá 100 ký tự")]
         public string AssetName { get; set; }
@@ -32,7 +36,10 @@ namespace MISA.QLTS.Core.Dtos
         [Range(0.0001, double.MaxValue, ErrorMessage = "Nguyên giá phải lớn hơn 0")]
         public decimal OriginalPrice { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
+        [Required(ErrorMessage = "Tỉ lệ hao mòn là bắt buộc")]
+        [Range(0, 100, ErrorMessage = "Tỉ lệ hao mòn phải từ 0 đến 100")]
+        public decimal DecreciationRate { get; set; }
 
+        public DateTime? CreatedDate { get; set; }
     }
 }
