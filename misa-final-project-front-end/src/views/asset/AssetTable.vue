@@ -761,7 +761,6 @@ onUnmounted(() => {
     font-size: 13px;
     transition: all 0.2s ease;
     font-weight: 400;
-    border: 1px solid #d1d5db;
 }
 
 .pagination-btn:hover:not(:disabled) {

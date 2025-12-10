@@ -118,7 +118,7 @@ export function useAsset() {
     }
   }
 
-  // Hàm lấy thống kê riêng (nếu cần)
+  // Hàm lấy thống kê riêng
   const fetchStatistics = async (customParams = {}) => {
     try {
       const params = {
