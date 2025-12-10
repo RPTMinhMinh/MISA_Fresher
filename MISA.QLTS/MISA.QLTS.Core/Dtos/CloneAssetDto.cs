@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Core.Dtos
 {
+    /// <summary>
+    /// Data Transfer Object cho việc nhân bản thông tin tài sản
+    /// </summary>
     public class CloneAssetDto
     {
         public string AssetCode { get; set; }

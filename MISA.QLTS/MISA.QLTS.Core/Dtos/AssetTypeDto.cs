@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Core.Dtos
 {
+    /// <summary>
+    /// Data Transfer Object cho thông tin tài sản
+    /// </summary>
     public class AssetTypeDto
     {
         public Guid AssetTypeId { get; set; }

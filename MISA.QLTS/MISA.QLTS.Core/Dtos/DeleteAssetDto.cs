@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Core.Dtos
 {
+    /// <summary>
+    /// Data Transfer Object cho việc xóa tài sản
+    /// </summary>
     public class DeleteAssetDto
     {
         [Required(ErrorMessage = "Danh sách mã tài sản là bắt buộc")]

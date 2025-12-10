@@ -31,7 +31,7 @@
 
                     <div class="col-span-2">
                         <MsInput v-model="form.departmentName" label="Tên bộ phận sử dụng"
-                            placeholder="Phòng Hành chính Tổng hợp" :disabled="true" />
+                            placeholder="" :disabled="true" />
                     </div>
 
                     <!-- SỬA: Sử dụng assetTypeOptionsForForm (hiển thị mã) -->
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="col-span-2">
-                        <MsInput v-model="form.assetTypeName" label="Tên loại tài sản" placeholder="Máy tính xách tay"
+                        <MsInput v-model="form.assetTypeName" label="Tên loại tài sản" placeholder=""
                             :disabled="true" />
                     </div>
 

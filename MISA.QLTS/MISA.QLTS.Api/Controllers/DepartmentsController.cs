@@ -6,14 +6,26 @@ using MISA.QLTS.Core.Interfaces.Services;
 
 namespace MISA.QLTS.Api.Controllers
 {
+    /// <summary>
+    /// Controller quản lý các thao tác liên quan đến bộ phận
+    /// </summary>
     public class DepartmentsController : BaseApiController
     {
         private readonly IDepartmentService _departmentService;
+
+        /// <summary>
+        /// Khởi tạo controller với service bộ phận
+        /// </summary>
+        /// <param name="departmentService">Service xử lý nghiệp vụ bộ phận</param>
         public DepartmentsController(IDepartmentService departmentService)
         {
             _departmentService = departmentService;
         }
 
+        /// <summary>
+        /// Lấy tất cả bộ phận
+        /// </summary>
+        /// <returns>Danh sách bộ phận hoặc thông báo lỗi</returns>
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<IEnumerable<DepartmentDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status204NoContent)]
@@ -38,6 +50,11 @@ namespace MISA.QLTS.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Lấy thông tin bộ phận theo mã
+        /// </summary>
+        /// <param name="code">Mã bộ phận</param>
+        /// <returns>Thông tin bộ phận hoặc thông báo lỗi</returns>
         [HttpGet("{code}")]
         [ProducesResponseType(typeof(ApiResponse<DepartmentDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]

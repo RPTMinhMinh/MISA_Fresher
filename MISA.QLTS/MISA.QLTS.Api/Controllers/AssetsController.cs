@@ -6,15 +6,27 @@ using MISA.QLTS.Core.Interfaces.Services;
 
 namespace MISA.QLTS.Api.Controllers
 {
+    /// <summary>
+    /// Controller quản lý các thao tác liên quan đến tài sản
+    /// </summary>
     public class AssetsController : BaseApiController
     {
         private readonly IAssetService _assetService;
 
+        /// <summary>
+        /// Khởi tạo controller với service tài sản
+        /// </summary>
+        /// <param name="assetService">Service xử lý nghiệp vụ tài sản</param>
         public AssetsController(IAssetService assetService)
         {
             _assetService = assetService;
         }
 
+        /// <summary>
+        /// Tạo mới một tài sản
+        /// </summary>
+        /// <param name="createAssetDto">Dữ liệu tạo tài sản</param>
+        /// <returns>Tài sản đã được tạo thành công hoặc thông báo lỗi</returns>
         [HttpPost]
         [ProducesResponseType(typeof(ApiResponse<AssetResponseDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
@@ -49,6 +61,11 @@ namespace MISA.QLTS.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Lấy thông tin tài sản theo mã tài sản
+        /// </summary>
+        /// <param name="assetCode">Mã tài sản</param>
+        /// <returns>Thông tin tài sản hoặc thông báo lỗi</returns>
         [HttpGet("{assetCode}")]
         [ProducesResponseType(typeof(ApiResponse<AssetResponseDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
@@ -77,6 +94,11 @@ namespace MISA.QLTS.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Lấy danh sách tài sản phân trang
+        /// </summary>
+        /// <param name="request">Thông tin phân trang và lọc</param>
+        /// <returns>Danh sách tài sản phân trang hoặc thông báo lỗi</returns>
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<PaginatedResult<AssetResponseDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status204NoContent)]
@@ -112,6 +134,11 @@ namespace MISA.QLTS.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Nhân bản tài sản từ tài sản có sẵn
+        /// </summary>
+        /// <param name="assetCode">Mã tài sản cần nhân bản</param>
+        /// <returns>Dữ liệu tài sản đã nhân bản hoặc thông báo lỗi</returns>
         [HttpGet("{assetCode}/clone")]
         [ProducesResponseType(typeof(ApiResponse<CloneAssetDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
@@ -142,6 +169,12 @@ namespace MISA.QLTS.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Cập nhật thông tin tài sản
+        /// </summary>
+        /// <param name="assetCode">Mã tài sản cần cập nhật</param>
+        /// <param name="updateAssetDto">Dữ liệu cập nhật tài sản</param>
+        /// <returns>Tài sản đã được cập nhật hoặc thông báo lỗi</returns>
         [HttpPut("{assetCode}")]
         [ProducesResponseType(typeof(ApiResponse<AssetResponseDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
@@ -182,6 +215,11 @@ namespace MISA.QLTS.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Xóa nhiều tài sản theo danh sách mã
+        /// </summary>
+        /// <param name="deleteDto">Đối tượng chứa danh sách mã tài sản cần xóa</param>
+        /// <returns>Số lượng tài sản đã xóa hoặc thông báo lỗi</returns>
         [HttpDelete]
         [ProducesResponseType(typeof(ApiResponse<int>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
@@ -208,6 +246,10 @@ namespace MISA.QLTS.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Lấy mã tài sản tiếp theo
+        /// </summary>
+        /// <returns>Mã tài sản tiếp theo hoặc thông báo lỗi</returns>
         [HttpGet("next-code")]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
@@ -226,6 +268,11 @@ namespace MISA.QLTS.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Lấy thống kê tài sản theo các tiêu chí
+        /// </summary>
+        /// <param name="request">Điều kiện thống kê</param>
+        /// <returns>Dữ liệu thống kê tài sản hoặc thông báo lỗi</returns>
         [HttpGet("statistics")]
         [ProducesResponseType(typeof(ApiResponse<AssetStatisticsDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]

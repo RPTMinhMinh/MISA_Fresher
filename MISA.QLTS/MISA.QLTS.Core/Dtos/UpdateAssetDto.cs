@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Core.Dtos
 {
+    /// <summary>
+    /// Data Transfer Object cho việc cập nhật thông tin tài sản
+    /// </summary>
     public class UpdateAssetDto
     {
         [MaxLength(100, ErrorMessage = "Tên tài sản không được vượt quá 100 ký tự")]

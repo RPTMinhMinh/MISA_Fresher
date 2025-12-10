@@ -12,14 +12,27 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Infrastructure.Repositories
 {
+    /// <summary>
+    /// Lớp repository triển khai các thao tác truy cập dữ liệu cho tài sản
+    /// </summary>
     public class AssetRepository : IAssetRepository
     {
         private readonly IDatabaseContext _connectionString;
 
+        /// <summary>
+        /// Khởi tạo một instance mới của AssetRepository
+        /// </summary>
+        /// <param name="databaseContext">Ngữ cảnh cơ sở dữ liệu</param>
         public AssetRepository(IDatabaseContext databaseContext)
         {
             _connectionString = databaseContext;
         }
+
+        /// <summary>
+        /// Tạo mới tài sản trong cơ sở dữ liệu
+        /// </summary>
+        /// <param name="asset">Thông tin tài sản cần tạo</param>
+        /// <returns>Tài sản đã được tạo</returns>
         public async Task<Asset> CreateAsset(Asset asset)
         {
             using var connection = _connectionString.CreateConnection();
@@ -57,6 +70,11 @@ namespace MISA.QLTS.Infrastructure.Repositories
             return asset;
         }
 
+        /// <summary>
+        /// Tìm tài sản theo mã tài sản
+        /// </summary>
+        /// <param name="assetCode">Mã tài sản cần tìm</param>
+        /// <returns>Tài sản tìm thấy hoặc null nếu không tồn tại</returns>
         public async Task<Asset?> GetByCodeAsync(string assetCode)
         {
             using var connection = _connectionString.CreateConnection();
@@ -82,6 +100,10 @@ namespace MISA.QLTS.Infrastructure.Repositories
         }
 
 
+        /// <summary>
+        /// Lấy mã tài sản tiếp theo từ cơ sở dữ liệu theo quy tắc "TSxxxxx"
+        /// </summary>
+        /// <returns>Mã tài sản tiếp theo</returns>
         public async Task<string> GetNextAssetCodeAsync()
         {
             using var connection = _connectionString.CreateConnection();
@@ -110,6 +132,11 @@ namespace MISA.QLTS.Infrastructure.Repositories
             return "TS00001";
         }
 
+        /// <summary>
+        /// Lấy danh sách tài sản phân trang theo điều kiện
+        /// </summary>
+        /// <param name="request">Thông tin yêu cầu phân trang và lọc</param>
+        /// <returns>Danh sách tài sản của trang hiện tại</returns>
         public async Task<IEnumerable<Asset>> GetPagedAsync(PaginationRequest request)
         {
             using var connection = _connectionString.CreateConnection();
@@ -170,6 +197,13 @@ namespace MISA.QLTS.Infrastructure.Repositories
             return await connection.QueryAsync<Asset>(baseSql, parameters);
         }
 
+        /// <summary>
+        /// Lấy tổng số lượng tài sản theo điều kiện lọc
+        /// </summary>
+        /// <param name="searchKeyword">Từ khóa tìm kiếm</param>
+        /// <param name="departmentCode">Mã bộ phận</param>
+        /// <param name="assetTypeCode">Mã loại tài sản</param>
+        /// <returns>Tổng số lượng tài sản thỏa mãn điều kiện</returns>
         public async Task<int> GetTotalCountAsync(string? searchKeyword = null, string? departmentCode = null, string? assetTypeCode = null)
         {
             using var connection = _connectionString.CreateConnection();
@@ -203,6 +237,10 @@ namespace MISA.QLTS.Infrastructure.Repositories
             return await connection.ExecuteScalarAsync<int>(sql, parameters);
         }
 
+        /// <summary>
+        /// Cập nhật thông tin tài sản
+        /// </summary>
+        /// <param name="asset">Thông tin tài sản cần cập nhật</param>
         public async Task UpdateAsync(Asset asset)
         {
             using var connection = _connectionString.CreateConnection();
@@ -226,6 +264,10 @@ namespace MISA.QLTS.Infrastructure.Repositories
             await connection.ExecuteAsync(sql, asset);
         }
 
+        /// <summary>
+        /// Xóa tài sản theo mã tài sản
+        /// </summary>
+        /// <param name="assetCode">Mã tài sản cần xóa</param>
         public async Task DeleteAsync(string assetCode)
         {
             using var connection = _connectionString.CreateConnection();
@@ -235,6 +277,13 @@ namespace MISA.QLTS.Infrastructure.Repositories
             await connection.ExecuteAsync(sql, new { AssetCode = assetCode });
         }
 
+        /// <summary>
+        /// Lấy thống kê tài sản theo các tiêu chí
+        /// </summary>
+        /// <param name="searchKeyword">Từ khóa tìm kiếm</param>
+        /// <param name="departmentCode">Mã bộ phận</param>
+        /// <param name="assetTypeCode">Mã loại tài sản</param>
+        /// <returns>Thông tin thống kê tài sản</returns>
         public async Task<AssetStatisticsDto> GetAssetStatisticsAsync(string? searchKeyword = null, string? departmentCode = null, string? assetTypeCode = null)
         {
             using var connection = _connectionString.CreateConnection();
