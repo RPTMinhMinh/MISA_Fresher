@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Core.Entities
 {
+    /// <summary>
+    /// Lớp thực thể đại diện cho tài sản trong hệ thống
+    /// </summary>
     public class Asset
     {
         public Guid AssetId { get; set; }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Core.Dtos
 {
+    /// <summary>
+    /// Data Transfer Object cho việc lọc thông tin thống kê tài sản
+    /// </summary>
     public class AssetStatisticsRequest
     {
         public string? SearchKeyword { get; set; }

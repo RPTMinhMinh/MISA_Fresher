@@ -10,14 +10,26 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Infrastructure.Repositories
 {
+    /// <summary>
+    /// Lớp repository triển khai các thao tác truy cập dữ liệu cho phòng ban
+    /// </summary>
     public class DepartmentRepository : IDepartmentRepository
     {
         private readonly IDatabaseContext _dbContext;
 
+        /// <summary>
+        /// Khởi tạo một instance mới của DepartmentRepository
+        /// </summary>
+        /// <param name="context">Ngữ cảnh cơ sở dữ liệu</param>
         public DepartmentRepository(IDatabaseContext context)
         {
             _dbContext = context;
         }
+
+        /// <summary>
+        /// Lấy tất cả phòng ban từ cơ sở dữ liệu
+        /// </summary>
+        /// <returns>Danh sách tất cả phòng ban</returns>
         public async Task<IEnumerable<Department>> GetAllAsync()
         {
             using var connection = _dbContext.CreateConnection();
@@ -31,6 +43,11 @@ namespace MISA.QLTS.Infrastructure.Repositories
             return await connection.QueryAsync<Department>(sql);
         }
 
+        /// <summary>
+        /// Tìm phòng ban theo mã phòng ban
+        /// </summary>
+        /// <param name="code">Mã phòng ban cần tìm</param>
+        /// <returns>Phòng ban tìm thấy hoặc null nếu không tồn tại</returns>
         public async Task<Department?> GetByCodeAsync(string code)
         {
             using var connection = _dbContext.CreateConnection();

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Core.Dtos.Common
 {
+    /// <summary>
+    /// Lớp đại diện cho kết quả phân trang với kiểu dữ liệu tổng quát
+    /// </summary>
+    /// <typeparam name="T">Kiểu dữ liệu của các bản ghi</typeparam>
     public class PaginatedResult<T>
     {
         public int PageNumber { get; set; }

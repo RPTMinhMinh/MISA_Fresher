@@ -38,7 +38,7 @@ export function useDropdownData() {
         // Tạo options cho form (hiển thị mã) - DÙNG CHO ASSET POPUP
         assetTypeOptionsForForm.value = assetTypes.data.map((item) => ({
           value: item.assetTypeCode,
-          label: item.assetTypeCode, // HIỂN THỊ MÃ
+          label: item.assetTypeCode + ' ' + item.assetTypeName, // HIỂN THỊ MÃ
           data: {
             ...item,
             usefulLife: item.usefulLife,
@@ -67,7 +67,7 @@ export function useDropdownData() {
         // Tạo options cho form (hiển thị mã) - DÙNG CHO ASSET POPUP
         departmentOptionsForForm.value = departments.data.map((item) => ({
           value: item.departmentCode,
-          label: item.departmentCode, // HIỂN THỊ MÃ
+          label: item.departmentCode + ' ' + item.departmentName, // HIỂN THỊ MÃ
           data: {
             ...item,
             departmentName: item.departmentName, // Lưu tên để dùng khi cần

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MISA.QLTS.Core.Dtos
 {
+    /// <summary>
+    /// Data Transfer Object cho việc tạo thông tin tài sản
+    /// </summary>
     public class CreateAssetDto
     {
         [Required(ErrorMessage = "Tên tài sản là bắt buộc")]
