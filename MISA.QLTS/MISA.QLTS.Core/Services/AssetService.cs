@@ -245,5 +245,38 @@ namespace MISA.QLTS.Core.Services
         {
             return await _assetRepository.GetNextAssetCodeAsync();
         }
+
+        public async Task<AssetStatisticsDto> GetAssetStatisticsAsync(AssetStatisticsRequest request)
+        {
+            // Validate department code nếu có
+            if (!string.IsNullOrWhiteSpace(request.DepartmentCode))
+            {
+                var department = await _departmentRepository.GetByCodeAsync(request.DepartmentCode);
+                if (department == null)
+                {
+                    // Nếu department không tồn tại, trả về thống kê 0
+                    return new AssetStatisticsDto();
+                }
+            }
+
+            // Validate asset type code nếu có
+            if (!string.IsNullOrWhiteSpace(request.AssetTypeCode))
+            {
+                var assetType = await _assetTypeRepository.GetByCodeAsync(request.AssetTypeCode);
+                if (assetType == null)
+                {
+                    // Nếu asset type không tồn tại, trả về thống kê 0
+                    return new AssetStatisticsDto();
+                }
+            }
+
+            // Lấy thống kê từ repository
+            var statistics = await _assetRepository.GetAssetStatisticsAsync(
+                request.SearchKeyword,
+                request.DepartmentCode,
+                request.AssetTypeCode);
+
+            return statistics;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MISA.QLTS.Core.Dtos.Common;
+﻿using MISA.QLTS.Core.Dtos;
+using MISA.QLTS.Core.Dtos.Common;
 using MISA.QLTS.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,9 @@ namespace MISA.QLTS.Core.Interfaces.Repositories
         Task<IEnumerable<Asset>> GetPagedAsync(PaginationRequest request);
         Task UpdateAsync(Asset asset);
         Task DeleteAsync(string assetId);
+        Task<AssetStatisticsDto> GetAssetStatisticsAsync(
+            string? searchKeyword = null,
+            string? departmentCode = null,
+            string? assetTypeCode = null);
     }
 }

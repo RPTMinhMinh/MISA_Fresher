@@ -171,15 +171,6 @@ const isOptionSelected = (optionValue) => { // Loại bỏ type annotations
     /* Có thể dùng margin để tạo khoảng cách giữa icon và text */
 }
 
-/* 🛑 BỔ SUNG: Áp dụng style background cho icon-filter nếu nó được sử dụng */
-.ms-dropdown-wrapper .icon-filter {
-    /* Lấy style từ icons.css: background: url('../images/qlts-icon.png') no-repeat -243px -68px; width: 17px; height: 16px; */
-    background: url('../assets/images/qlts-icon.png') no-repeat -243px -68px !important;
-    /* !important để đảm bảo nó ghi đè nếu có style khác cố định kích thước/background */
-    width: 17px !important;
-    height: 16px !important;
-}
-
 /* 🛑 SỬA ĐỔI 2: Ghi đè mũi tên trỏ xuống bằng icon-small-arrow-down */
 .ms-dropdown-wrapper :deep(.ant-select-arrow) {
     /* Ẩn icon mặc định (svg) */
